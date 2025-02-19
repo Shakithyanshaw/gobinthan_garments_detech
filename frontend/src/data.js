@@ -15,6 +15,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
+      fabric: 'Soft & smooth',
     },
     {
       //_id: '2',
@@ -31,6 +32,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
+      fabric: 'Thin and smooth',
     },
     {
       //_id: '3',
@@ -47,6 +49,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
+      fabric: 'Thick Leather',
     },
     {
       //_id: '4',
@@ -63,6 +66,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
+      fabric: 'Silky and Smooth',
     },
     {
       //_id: '5',
@@ -79,6 +83,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
+      fabric: 'Smooth',
     },
     {
       //_id: '6',
@@ -95,6 +100,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
+      fabric: 'Silky',
     },
   ],
 };
