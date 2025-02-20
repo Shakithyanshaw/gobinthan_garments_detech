@@ -27,7 +27,7 @@ const data = {
       size: 'XL',
       image: '/images/Ladies_Home_Wear.png', // 679px × 829px
       price: 120000,
-      countInStock: 10,
+      countInStock: 0,
       brand: 'Gobinthan Garments',
       rating: 4.5,
       numReviews: 10,
