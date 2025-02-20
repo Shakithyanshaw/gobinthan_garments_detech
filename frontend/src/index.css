@@ -20,6 +20,10 @@ main {
   flex: 1;
 }
 
+h1 {
+  color: #801001;
+}
+
 .btn-primary,
 .btn-outline-primary {
   background-color: #801001;
@@ -64,6 +68,10 @@ main {
 
 .img-thumbnail {
   height: 100px;
+}
+
+.small-container {
+  max-width: 600px;
 }
 
 .logo-container {
