@@ -1,7 +1,7 @@
 const data = {
   products: [
     {
-      //_id: '1',
+      _id: '1',
       name: 'Ladies Casual Wear',
       code: 'LCW001',
       slug: 'Ladies-Casual-Wear',
@@ -18,7 +18,7 @@ const data = {
       fabric: 'Soft & smooth',
     },
     {
-      //_id: '2',
+      _id: '2',
       name: 'Ladies Home Wear',
       code: 'LHW001',
       slug: 'Ladies-Home-Wear',
@@ -35,7 +35,7 @@ const data = {
       fabric: 'Thin and smooth',
     },
     {
-      //_id: '3',
+      _id: '3',
       name: 'Ladies Fashion Wear',
       code: 'LFW001',
       slug: 'Ladies-Fashion-Wear',
@@ -52,7 +52,7 @@ const data = {
       fabric: 'Thick Leather',
     },
     {
-      //_id: '4',
+      _id: '4',
       name: 'Customizable T-Shirts',
       code: 'CTS001',
       slug: 'Customizable-T-Shirts',
@@ -69,7 +69,7 @@ const data = {
       fabric: 'Silky and Smooth',
     },
     {
-      //_id: '5',
+      _id: '5',
       name: 'School Uniforms',
       code: 'SU001',
       slug: 'School-Uniforms',
@@ -86,7 +86,7 @@ const data = {
       fabric: 'Smooth',
     },
     {
-      //_id: '6',
+      _id: '6',
       name: 'Bed Clothes',
       code: 'BC001',
       slug: 'Bed-Clothes',
