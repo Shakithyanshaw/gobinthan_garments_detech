@@ -9,10 +9,14 @@ function App() {
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
         <header>
-          <Navbar bg="dark" variant="dark">
+          <Navbar
+            style={{ backgroundColor: '#801001', height: '150px' }}
+            variant="dark"
+            className="custom-navbar"
+          >
             <Container>
-              <Link to="/" className="navbar-brand">
-                Gobinthan Garments
+              <Link to="/" className="navbar-brand logo-container">
+                <img src="/images/top_logo.png" alt="Logo" height="100" />
               </Link>
             </Container>
           </Navbar>

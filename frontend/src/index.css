@@ -53,3 +53,11 @@ main {
 .img-large {
   max-width: 80%;
 }
+.logo-container {
+  position: absolute;
+  top: -10px; /* Adjust this to move logo higher or lower */
+}
+
+.custom-navbar {
+  position: relative;
+}
