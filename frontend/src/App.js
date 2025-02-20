@@ -3,21 +3,38 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
+import Badge from 'react-bootstrap/esm/Badge';
+import Nav from 'react-bootstrap/esm/Nav';
+import { useContext } from 'react';
+import { Store } from './Store';
 
 function App() {
+  const { state } = useContext(Store);
+  const { cart } = state;
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
         <header>
           <Navbar
-            style={{ backgroundColor: '#801001', height: '150px' }}
+            style={{ backgroundColor: '#801001', height: '167px' }}
             variant="dark"
             className="custom-navbar"
           >
             <Container>
               <Link to="/" className="navbar-brand logo-container">
-                <img src="/images/top_logo.png" alt="Logo" height="100" />
+                <img src="/images/top_logo.png" alt="Logo" height="120" />
               </Link>
+
+              <Nav className="me-auto w-100 justify-content-end">
+                <Link to="/cart" className="nav-link">
+                  Cart
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg="danger">
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                    </Badge>
+                  )}
+                </Link>
+              </Nav>
             </Container>
           </Navbar>
         </header>

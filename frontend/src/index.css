@@ -55,7 +55,7 @@ main {
 }
 .logo-container {
   position: absolute;
-  top: -10px; /* Adjust this to move logo higher or lower */
+  top: -20px; /* Adjust this to move logo higher or lower */
 }
 
 .custom-navbar {
