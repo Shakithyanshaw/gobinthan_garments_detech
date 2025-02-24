@@ -107,3 +107,7 @@ h3 {
   border-bottom: 0.7rem solid #801001;
   color: #000000;
 }
+
+.text-bold {
+  font-weight: bold;
+}

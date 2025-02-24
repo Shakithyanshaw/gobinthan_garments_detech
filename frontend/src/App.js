@@ -18,6 +18,8 @@ import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import SearchBox from './components/SearchBox';
+import SearchScreen from './screens/SearchScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -83,6 +85,7 @@ function App() {
                   </Link>
                 )}
               </Nav>
+              <SearchBox />
             </Container>
           </Navbar>
         </header>
@@ -99,6 +102,7 @@ function App() {
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route path="/order/:id" element={<OrderScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />
+              <Route path="/search" element={<SearchScreen />} />
             </Routes>
           </Container>
         </main>
