@@ -20,7 +20,9 @@ main {
   flex: 1;
 }
 
-h1 {
+h1,
+h2,
+h3 {
   color: #801001;
 }
 
@@ -36,6 +38,20 @@ h1 {
   background-color: #a61502;
   color: white;
   border: 2px solid #a61502;
+}
+
+.custom-btn {
+  background-color: #801001 !important; /* Change to your desired color */
+  color: white !important; /* Ensure the text is visible */
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.custom-btn:hover {
+  background-color: #a61502 !important; /* Slightly darker shade on hover */
 }
 
 .products {
