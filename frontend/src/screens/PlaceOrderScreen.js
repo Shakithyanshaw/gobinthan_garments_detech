@@ -87,7 +87,9 @@ export default function PlaceOrderScreen() {
       <Helmet>
         <title>Preview Order</title>
       </Helmet>
-      <h3 className="my-3">My Order summary</h3>
+      <br />
+      <h1 style={{ fontSize: '2rem' }}>My Order summary</h1>
+      <br />
 
       <Row>
         <Col md={8}>

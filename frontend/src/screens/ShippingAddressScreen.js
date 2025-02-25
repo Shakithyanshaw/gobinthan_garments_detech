@@ -56,14 +56,20 @@ export default function ShippingAddressScreen() {
     navigate('/payment');
   };
 
+  const smallContainerStyle = {
+    maxWidth: '600px',
+  };
+
   return (
     <div className="marginAll">
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
       <CheckoutSteps step1 step2></CheckoutSteps>
-      <div className="container small-container">
-        <h2 className="my-3">Shipping Address</h2>
+      <div style={smallContainerStyle} className="container ">
+        <br />
+        <h1 style={{ fontSize: '2rem' }}>Shipping Address</h1>
+        <br />
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Label>Full Name</Form.Label>

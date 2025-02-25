@@ -43,7 +43,7 @@ export default function CartScreen() {
       <Helmet>
         <title>Shopping Card</title>
       </Helmet>
-      <h1>Shopping Cart</h1>
+      <h1 style={{ fontSize: '2rem' }}>Shopping Cart</h1> <br />
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (

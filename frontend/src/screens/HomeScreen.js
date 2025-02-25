@@ -47,7 +47,8 @@ function HomeScreen() {
       <Helmet>
         <title>Gobinthan Garments</title>
       </Helmet>
-      <h1>Feature Products</h1>
+      <h1 style={{ fontSize: '2rem' }}>Feature Products</h1>
+      <br />
       <div className="products">
         {loading ? (
           <LoadingBox />

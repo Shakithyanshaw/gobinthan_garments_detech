@@ -31,14 +31,20 @@ export default function PaymentMethodScreen() {
     Navigate('/placeorder');
   };
 
+  const smallContainerStyle = {
+    maxWidth: '600px',
+  };
+
   return (
     <div className="marginAll">
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
-      <div className="container small-container">
+      <div style={smallContainerStyle} className="container">
         <Helmet>
           <title>Payment Method</title>
         </Helmet>
-        <h1 className="my-3">Payment Method</h1>
+        <br />
+        <h1 style={{ fontSize: '2rem' }}>Payment Method</h1>
+        <br />
         <Form onSubmit={submitHandler}>
           <div className="mb-3">
             <Form.Check

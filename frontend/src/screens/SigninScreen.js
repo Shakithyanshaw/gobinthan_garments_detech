@@ -21,6 +21,10 @@ export default function SigninScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
 
+  const smallContainerStyle = {
+    maxWidth: '600px',
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -43,7 +47,7 @@ export default function SigninScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <Container className="small-container">
+    <Container style={smallContainerStyle}>
       <Helmet>
         <title>Sign In</title>
       </Helmet>

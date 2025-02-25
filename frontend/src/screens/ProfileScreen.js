@@ -65,14 +65,17 @@ export default function ProfileScreen() {
     }
   };
 
+  const smallContainerStyle = {
+    maxWidth: '600px',
+  };
+
   return (
-    <div className="container small-container">
+    <div style={smallContainerStyle} className="container ">
       <Helmet>
         <title>User Profile</title>
       </Helmet>
-
-      <h2 className="my-3">My Profile</h2>
-
+      <br />
+      <h1 style={{ fontSize: '2rem' }}>My Profile</h1> <br />
       <form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>

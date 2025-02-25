@@ -25,6 +25,10 @@ export default function SignupScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
 
+  const smallContainerStyle = {
+    maxWidth: '600px',
+  };
+
   function validateName(name) {
     const regex = /^[a-zA-Z\s]+$/;
     return regex.test(name);
@@ -74,7 +78,7 @@ export default function SignupScreen() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <Container className="small-container">
+    <Container style={smallContainerStyle}>
       <Helmet>
         <title>Sign Up</title>
       </Helmet>
