@@ -1,5 +1,4 @@
-//import Header1 from './components/Header1';
-//import { assets } from './assets/assets';
+import { assets } from '../assets/assets';
 
 const AboutUs = () => {
   return (
@@ -114,7 +113,7 @@ const AboutUs = () => {
           {/* Image Section */}
           <div className="lg:w-1/2 w-full flex justify-center lg:justify-end">
             <img
-              //src={assets.ROAD_MAP}
+              src={assets.ROAD_MAP}
               alt="Export-Grade Stitching"
               className="w-full max-w-sm lg:max-w-md object-cover rounded-lg shadow-lg"
             />
@@ -149,7 +148,7 @@ const AboutUs = () => {
           {/* Image Section (Left Side on Large Screens) */}
           <div className="lg:w-1/2 w-full flex justify-center lg:justify-start">
             <img
-              //src={assets.ROAD_MAP}
+              src={assets.ROAD_MAP}
               alt="Socks Manufacturing"
               className="w-full max-w-sm lg:max-w-md object-cover rounded-lg shadow-lg"
             />
@@ -184,7 +183,7 @@ const AboutUs = () => {
           {/* Image Section */}
           <div className="lg:w-1/2 w-full flex justify-center lg:justify-end">
             <img
-              //src={assets.ROAD_MAP}
+              src={assets.ROAD_MAP}
               alt="Export-Grade Stitching"
               className="w-full max-w-sm lg:max-w-md object-cover rounded-lg shadow-lg"
             />
@@ -226,7 +225,7 @@ const AboutUs = () => {
           {/* Image Section (Left Side on Large Screens) */}
           <div className="lg:w-1/2 w-full flex justify-center lg:justify-start">
             <img
-              //src={assets.ROAD_MAP}
+              src={assets.ROAD_MAP}
               alt="Socks Manufacturing"
               className="w-full max-w-sm lg:max-w-md object-cover rounded-lg shadow-lg"
             />

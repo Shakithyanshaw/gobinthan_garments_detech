@@ -104,14 +104,14 @@ const Footer = () => {
         {/* Right Side: Links */}
         <div>
           <a
-            href="#"
+            href="/"
             className="hover:underline hover:text-gray-500 transition duration-300"
           >
             Privacy Policy
           </a>{' '}
           |{' '}
           <a
-            href="#"
+            href="/"
             className="hover:underline hover:text-gray-500 transition duration-300"
           >
             Terms of Service
