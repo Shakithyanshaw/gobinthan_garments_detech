@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Store } from '../Store';
 import CardHeader from '../components/CardHeadder';
+import { Container } from 'react-bootstrap';
 
 export default function PaymentMethodScreen() {
   const Navigate = useNavigate();
@@ -37,44 +38,46 @@ export default function PaymentMethodScreen() {
   };
 
   return (
-    <div className="d-flex flex-column site-container">
+    <div>
       <CardHeader />
-      <div className="marginAll">
-        <CheckoutSteps step1 step2 step3></CheckoutSteps>
-        <div style={smallContainerStyle} className="container">
-          <Helmet>
-            <title>Payment Method</title>
-          </Helmet>
-          <br />
-          <h1 style={{ fontSize: '2rem' }}>Payment Method</h1>
-          <br />
-          <Form onSubmit={submitHandler}>
-            <div className="mb-3">
-              <Form.Check
-                type="radio"
-                id="PayPal"
-                label="PayPal"
-                value="PayPal"
-                checked={paymentMethodName === 'PayPal'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <Form.Check
-                type="radio"
-                id="COD"
-                label="Cash On Delivery"
-                value="COD"
-                checked={paymentMethodName === 'COD'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <Button type="submit">Continue</Button>
-            </div>
-          </Form>
+      <Container className="mt-5">
+        <div className="marginAll">
+          <CheckoutSteps step1 step2 step3></CheckoutSteps>
+          <div style={smallContainerStyle} className="container">
+            <Helmet>
+              <title>Payment Method</title>
+            </Helmet>
+            <br />
+            <h1 style={{ fontSize: '2rem' }}>Payment Method</h1>
+            <br />
+            <Form onSubmit={submitHandler}>
+              <div className="mb-3">
+                <Form.Check
+                  type="radio"
+                  id="PayPal"
+                  label="PayPal"
+                  value="PayPal"
+                  checked={paymentMethodName === 'PayPal'}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <Form.Check
+                  type="radio"
+                  id="COD"
+                  label="Cash On Delivery"
+                  value="COD"
+                  checked={paymentMethodName === 'COD'}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <Button type="submit">Continue</Button>
+              </div>
+            </Form>
+          </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

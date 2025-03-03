@@ -11,6 +11,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import axios from 'axios';
 import Header1 from '../components/Header1';
+import Container from 'react-bootstrap/Container';
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -40,100 +41,109 @@ export default function CartScreen() {
   };
 
   return (
-    <div className="d-flex flex-column site-container">
+    <div>
       <Header1 />
-      <div>
-        <Helmet>
-          <title>Shopping Card</title>
-        </Helmet>
-        <h1 style={{ fontSize: '2rem' }}>Shopping Cart</h1> <br />
-        <Row>
-          <Col md={8}>
-            {cartItems.length === 0 ? (
-              <MessageBox>
-                Dear valuable customer, Your Cart is empty.
-                <Link to="/">Go Shopping</Link>
-              </MessageBox>
-            ) : (
-              <ListGroup>
-                {cartItems.map((item) => (
-                  <ListGroupItem key={item._id}>
-                    <Row className="align-items-center">
-                      <Col md={4}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="img-fluid rounded img-thumbnail"
-                        ></img>{' '}
-                        <Link className="cardname" to={`/product/${item._id}`}>
-                          {item.name}
-                        </Link>
-                      </Col>
-                      <Col md={3}>
-                        <Button
-                          onClick={() =>
-                            updateCartHandler(item, item.quantity - 1)
-                          }
-                          variant="light"
-                          disabled={item.quantity === 1}
-                        >
-                          <i className="fas fa-minus-circle"></i>
-                        </Button>{' '}
-                        <span>{item.quantity}</span>{' '}
-                        <Button
-                          variant="light"
-                          onClick={() =>
-                            updateCartHandler(item, item.quantity + 1)
-                          }
-                          disabled={item.quantity === item.countInStock}
-                        >
-                          <i className="fas fa-plus-circle"></i>
-                        </Button>
-                      </Col>
-                      <Col md={3}>ID :- {item.code}</Col>
-                      <Col md={2}>
-                        <Button
-                          onClick={() => removeItemHandler(item)}
-                          variant="light"
-                        >
-                          <i className="fas fa-trash"></i>
-                        </Button>
-                      </Col>
-                    </Row>
-                  </ListGroupItem>
-                ))}
-              </ListGroup>
-            )}
-          </Col>
-          <Col md={4}>
-            <Card>
-              <Card.Body>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>
-                    <h3>
-                      Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                      items) : Rs
-                      {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
-                    </h3>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <div className="d-grid">
-                      <Button
-                        type="button"
-                        variant="primary"
-                        onClick={checkoutHandler}
-                        disabled={cartItems.length === 0}
-                      >
-                        Proceed to Checkout
-                      </Button>
-                    </div>
-                  </ListGroup.Item>
+      <Container className="mt-5">
+        <div>
+          <Helmet>
+            <title>Shopping Card</title>
+          </Helmet>
+          <h1 style={{ fontSize: '2rem' }}>Shopping Cart</h1> <br />
+          <Row>
+            <Col md={8}>
+              {cartItems.length === 0 ? (
+                <MessageBox>
+                  Dear valuable customer, Your Cart is empty.
+                  <Link to="/">Go Shopping</Link>
+                </MessageBox>
+              ) : (
+                <ListGroup>
+                  {cartItems.map((item) => (
+                    <ListGroupItem key={item._id}>
+                      <Row className="align-items-center">
+                        <Col md={4}>
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="img-fluid rounded img-thumbnail"
+                          ></img>{' '}
+                          <Link
+                            className="cardname"
+                            to={`/product/${item._id}`}
+                          >
+                            {item.name}
+                          </Link>
+                        </Col>
+                        <Col md={3}>
+                          <Button
+                            onClick={() =>
+                              updateCartHandler(item, item.quantity - 1)
+                            }
+                            variant="light"
+                            disabled={item.quantity === 1}
+                          >
+                            <i className="fas fa-minus-circle"></i>
+                          </Button>{' '}
+                          <span>{item.quantity}</span>{' '}
+                          <Button
+                            variant="light"
+                            onClick={() =>
+                              updateCartHandler(item, item.quantity + 1)
+                            }
+                            disabled={item.quantity === item.countInStock}
+                          >
+                            <i className="fas fa-plus-circle"></i>
+                          </Button>
+                        </Col>
+                        <Col md={3}>ID :- {item.code}</Col>
+                        <Col md={2}>
+                          <Button
+                            onClick={() => removeItemHandler(item)}
+                            variant="light"
+                          >
+                            <i className="fas fa-trash"></i>
+                          </Button>
+                        </Col>
+                      </Row>
+                    </ListGroupItem>
+                  ))}
                 </ListGroup>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+              )}
+            </Col>
+            <Col md={4}>
+              <Card>
+                <Card.Body>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item>
+                      <h3>
+                        Subtotal (
+                        {cartItems.reduce((a, c) => a + c.quantity, 0)} items) :
+                        Rs
+                        {cartItems.reduce(
+                          (a, c) => a + c.price * c.quantity,
+                          0
+                        )}
+                      </h3>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      <div className="d-grid">
+                        <Button
+                          type="button"
+                          variant="primary"
+                          onClick={checkoutHandler}
+                          disabled={cartItems.length === 0}
+                        >
+                          Proceed to Checkout
+                        </Button>
+                      </div>
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      </Container>
     </div>
   );
 }

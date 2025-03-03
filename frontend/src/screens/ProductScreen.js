@@ -14,6 +14,7 @@ import MessageBox from '../components/MeaasgeBox';
 import { getError } from '../Util';
 import { Store } from '../Store';
 import CardHeader from '../components/CardHeadder';
+import { Container } from 'react-bootstrap';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -74,80 +75,82 @@ function ProductScreen() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div className="d-flex flex-column site-container">
+    <div>
       <CardHeader />
-      <div>
-        <Row>
-          <Col md={5}>
-            <img
-              className="img-large"
-              src={product.image}
-              alt={product.name}
-            ></img>
-          </Col>
-          <Col md={4}>
-            <ListGroup>
-              <ListGroup.Item>
-                <Helmet>
-                  <title>{product.name}</title>
-                </Helmet>
-                <h1 style={{ fontSize: '2rem' }}>{product.name}</h1>
-              </ListGroup.Item>
-              <ListGroup.Item>ID :- {product.code}</ListGroup.Item>
-              <ListGroup.Item>
-                <Rating
-                  rating={product.rating}
-                  numReviews={product.numReviews}
-                ></Rating>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <strong> Fabric Short Detail :-</strong>
-                <p>{product.fabric}</p>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <strong>Product Description :-</strong>
-                <p>{product.description}</p>
-              </ListGroup.Item>
-            </ListGroup>
-          </Col>
-          <Col md={3}>
-            <Card>
-              <Card.Body>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Price:</Col>
-                      <Col>Rs{product.price}</Col>
-                    </Row>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Status:</Col>
-                      <Col>
-                        {product.countInStock > 0 ? (
-                          <Badge bg="success">Available</Badge>
-                        ) : (
-                          <Badge bg="danger">Unavailable</Badge>
-                        )}
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-
-                  {product.countInStock > 0 && (
+      <Container className="mt-5">
+        <div>
+          <Row>
+            <Col md={5}>
+              <img
+                className="img-large"
+                src={product.image}
+                alt={product.name}
+              ></img>
+            </Col>
+            <Col md={4}>
+              <ListGroup>
+                <ListGroup.Item>
+                  <Helmet>
+                    <title>{product.name}</title>
+                  </Helmet>
+                  <h1 style={{ fontSize: '2rem' }}>{product.name}</h1>
+                </ListGroup.Item>
+                <ListGroup.Item>ID :- {product.code}</ListGroup.Item>
+                <ListGroup.Item>
+                  <Rating
+                    rating={product.rating}
+                    numReviews={product.numReviews}
+                  ></Rating>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <strong> Fabric Short Detail :-</strong>
+                  <p>{product.fabric}</p>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <strong>Product Description :-</strong>
+                  <p>{product.description}</p>
+                </ListGroup.Item>
+              </ListGroup>
+            </Col>
+            <Col md={3}>
+              <Card>
+                <Card.Body>
+                  <ListGroup variant="flush">
                     <ListGroup.Item>
-                      <div className="d-grid">
-                        <Button onClick={addToCartHandler} variant="primary">
-                          Add to card
-                        </Button>
-                      </div>
+                      <Row>
+                        <Col>Price:</Col>
+                        <Col>Rs{product.price}</Col>
+                      </Row>
                     </ListGroup.Item>
-                  )}
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Status:</Col>
+                        <Col>
+                          {product.countInStock > 0 ? (
+                            <Badge bg="success">Available</Badge>
+                          ) : (
+                            <Badge bg="danger">Unavailable</Badge>
+                          )}
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+
+                    {product.countInStock > 0 && (
+                      <ListGroup.Item>
+                        <div className="d-grid">
+                          <Button onClick={addToCartHandler} variant="primary">
+                            Add to card
+                          </Button>
+                        </div>
+                      </ListGroup.Item>
+                    )}
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      </Container>
     </div>
   );
 }

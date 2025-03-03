@@ -1,6 +1,6 @@
 import React, { useContext, useReducer, useState } from 'react';
 import { Store } from '../Store';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -71,59 +71,61 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div className="d-flex flex-column site-container">
+    <div>
       <CardHeader />
-      <div style={smallContainerStyle} className="container ">
-        <Helmet>
-          <title>User Profile</title>
-        </Helmet>
-        <br />
-        <h1 style={{ fontSize: '2rem' }}>My Profile</h1> <br />
-        <form onSubmit={submitHandler}>
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </Form.Group>
+      <Container className="mt-5">
+        <div style={smallContainerStyle} className="container ">
+          <Helmet>
+            <title>User Profile</title>
+          </Helmet>
+          <br />
+          <h1 style={{ fontSize: '2rem' }}>My Profile</h1> <br />
+          <form onSubmit={submitHandler}>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="password">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-          <div className="mb-3">
-            <Button type="submit">Update</Button>
-          </div>
-        </form>
-      </div>
+            <div className="mb-3">
+              <Button type="submit">Update</Button>
+            </div>
+          </form>
+        </div>
+      </Container>
     </div>
   );
 }
