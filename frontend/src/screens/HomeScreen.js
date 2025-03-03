@@ -8,6 +8,7 @@ import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MeaasgeBox';
+import Header from '../components/Header1';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -43,26 +44,29 @@ function HomeScreen() {
   }, []);
 
   return (
-    <div>
-      <Helmet>
-        <title>Gobinthan Garments</title>
-      </Helmet>
-      <h1 style={{ fontSize: '2rem' }}>Feature Products</h1>
-      <br />
-      <div className="products">
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <Row>
-            {products.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                <Product product={product}></Product>
-              </Col>
-            ))}
-          </Row>
-        )}
+    <div className="d-flex flex-column site-container">
+      <Header />
+      <div>
+        <Helmet>
+          <title>Gobinthan Garments</title>
+        </Helmet>
+        <h1 style={{ fontSize: '2rem' }}>Feature Products</h1>
+        <br />
+        <div className="products">
+          {loading ? (
+            <LoadingBox />
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <Row>
+              {products.map((product) => (
+                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+                  <Product product={product}></Product>
+                </Col>
+              ))}
+            </Row>
+          )}
+        </div>
       </div>
     </div>
   );
