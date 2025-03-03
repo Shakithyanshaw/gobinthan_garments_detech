@@ -8,7 +8,8 @@ import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MeaasgeBox';
-import Header from '../components/Header1';
+
+import CardHeader from '../components/CardHeadder';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -45,7 +46,7 @@ function HomeScreen() {
 
   return (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <div>
         <Helmet>
           <title>Gobinthan Garments</title>
