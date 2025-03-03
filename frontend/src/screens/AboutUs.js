@@ -1,8 +1,10 @@
 import { assets } from '../assets/assets';
+import Header1 from '../components/Header1';
 
 const AboutUs = () => {
   return (
     <div className="w-full overflow-hidden">
+      <Header1 />
       {/* Who we are */}
       <section
         className="container mx-auto px-4 sm:px-6 lg:px-8 py-8"

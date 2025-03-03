@@ -9,27 +9,27 @@ const Categories = () => {
     {
       name: 'Ladies Casual Wear',
       image: assets.Ladies_Casual_Wear,
-      link: '/ladies-casual-wear',
+      link: '/',
     },
     {
       name: 'Ladies Home Wear',
       image: assets.Ladies_Home_Wear,
-      link: '/ladies-home-wear',
+      link: '/',
     },
     {
       name: 'Ladies Fashion Wear',
       image: assets.Ladies_Fashion_Wear,
-      link: '/ladies-fashion-wear',
+      link: '/',
     },
     {
       name: 'Customizable tshirts',
       image: assets.Customizable_tshirts,
-      link: '/customizable-tshirts',
+      link: '/',
     },
     {
       name: 'School Uniforms',
       image: assets.School_Uniforms,
-      link: '/school-uniforms',
+      link: '/',
     },
     { name: 'Bed Clothes', image: assets.Bed_Clothes, link: '/bed-clothes' },
   ];

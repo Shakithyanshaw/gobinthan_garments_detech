@@ -22,6 +22,7 @@ import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import Footer from './components/Footer';
 import AboutUs from './screens/AboutUs';
+import Home from './screens/Home';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -96,6 +97,7 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/cart" element={<CardScreen />} />
               <Route path="/signin" element={<SigninScreen />} />

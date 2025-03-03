@@ -19,7 +19,7 @@ const Header = () => {
 
       {/* Main content container */}
       <div className="relative z-0 container text-center mx-auto mt-20 md:px-20 lg:px-32 text-white">
-        <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[82px] whitespace-nowrap font-semibold pt-0">
+        <h2 className=" text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[82px] whitespace-nowrap font-semibold pt-0">
           Welcome to <br /> Kobinthan Garments
         </h2>
       </div>
