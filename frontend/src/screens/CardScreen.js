@@ -54,7 +54,7 @@ export default function CartScreen() {
               {cartItems.length === 0 ? (
                 <MessageBox>
                   Dear valuable customer, Your Cart is empty.
-                  <Link to="/">Go Shopping</Link>
+                  <Link to="/products">Go Shopping</Link>
                 </MessageBox>
               ) : (
                 <ListGroup>
@@ -77,7 +77,7 @@ export default function CartScreen() {
                         <Col md={3}>
                           <Button
                             onClick={() =>
-                              updateCartHandler(item, item.quantity - 1)
+                              updateCartHandler(item, item.quantity - 5)
                             }
                             variant="light"
                             disabled={item.quantity === 1}
@@ -88,7 +88,7 @@ export default function CartScreen() {
                           <Button
                             variant="light"
                             onClick={() =>
-                              updateCartHandler(item, item.quantity + 1)
+                              updateCartHandler(item, item.quantity + 5)
                             }
                             disabled={item.quantity === item.countInStock}
                           >

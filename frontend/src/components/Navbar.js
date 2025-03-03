@@ -29,7 +29,14 @@ const Navbar = () => {
     <div className="absolute top-0 left-0 w-full z-10">
       <div className="gap-2 container mx-auto flex justify-between items-center py-0 px-6 md:px-35 lg:px-40 bg-transparent">
         {/* Logo */}
-        <img src={assets.top_logo} alt="Logo" className="w-24 md:w-24" />
+        <Link to="/">
+          <img
+            src={assets.top_logo}
+            alt="Logo"
+            className="w-24 md:w-24"
+            style={{ cursor: 'pointer' }} // Optional: Change cursor to pointer for better UX
+          />
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-7 text-customRed bg-white px-6 py-2 rounded-full shadow-md">
