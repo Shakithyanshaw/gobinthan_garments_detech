@@ -1,12 +1,13 @@
 import ImageSlider from './ImageSlider';
 import Navbar from './Navbar';
+import fabricImage from '../assets/FABRIC.png';
 
 const Header = () => {
   return (
     <div
       className="min-h-[85vh] sm:min-h-[80vh] lg:min-h-[120vh] ipad:min-h-[80vh] mb-4 bg-customRed bg-cover bg-center flex flex-col items-center w-full overflow-hidden relative"
       style={{
-        backgroundImage: "url('/FABRIC.png')",
+        backgroundImage: `url(${fabricImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
