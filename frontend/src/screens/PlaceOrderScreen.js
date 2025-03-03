@@ -12,7 +12,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 import LoadingBox from '../components/LoadingBox';
 import { toast } from 'react-toastify';
 import { getError } from '../Util';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -84,7 +84,7 @@ export default function PlaceOrderScreen() {
 
   return (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <div className="marginAll">
         <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
         <Helmet>

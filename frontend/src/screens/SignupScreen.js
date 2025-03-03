@@ -9,7 +9,7 @@ import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import Col from 'react-bootstrap/Col';
 import { getError } from '../Util';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 export default function SignupScreen() {
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ export default function SignupScreen() {
 
   return (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <Container style={smallContainerStyle}>
         <Helmet>
           <title>Sign Up</title>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Store } from '../Store';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 export default function PaymentMethodScreen() {
   const Navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function PaymentMethodScreen() {
 
   return (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <div className="marginAll">
         <CheckoutSteps step1 step2 step3></CheckoutSteps>
         <div style={smallContainerStyle} className="container">

@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../Util';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 export default function SigninScreen() {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ export default function SigninScreen() {
 
   return (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <Container style={smallContainerStyle}>
         <Helmet>
           <title>Sign In</title>

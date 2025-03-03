@@ -40,7 +40,7 @@ const CartNavbar = () => {
       <div className="gap-2 container mx-auto flex justify-between items-center py-0 px-6 md:px-35 lg:px-40 bg-transparent">
         <img src={assets.top_logo} alt="Logo" className="w-24 md:w-24" />
 
-        <ul className="hidden md:flex gap-7 text-customRed bg-white px-6 py-2 rounded-full shadow-md">
+        <ul className="hidden md:flex gap-3 text-customRed bg-white px-6 py-2 rounded-full shadow-md">
           {['/', '/about', '/contact', '/products', '/fabrics'].map(
             (path, index) => (
               <Link
@@ -58,7 +58,7 @@ const CartNavbar = () => {
           )}
         </ul>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 mt-3">
           <SearchBox />
           <Link
             to="/cart"
@@ -138,7 +138,7 @@ const CartNavbar = () => {
             )}
           </ul>
 
-          <div className="flex flex-col items-center mt-10 gap-6">
+          <div className="flex flex-col items-center mt-12 gap-4">
             <Link to="/cart" className="nav-link">
               Cart
             </Link>

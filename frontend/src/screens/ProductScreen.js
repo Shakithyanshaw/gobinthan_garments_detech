@@ -13,7 +13,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MeaasgeBox';
 import { getError } from '../Util';
 import { Store } from '../Store';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -75,7 +75,7 @@ function ProductScreen() {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <div>
         <Row>
           <Col md={5}>

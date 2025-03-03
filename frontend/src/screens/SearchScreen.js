@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet-async';
 import { getError } from '../Util';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MeaasgeBox';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -145,7 +145,7 @@ export default function SearchScreen() {
 
   return (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <div className="marginAll">
         <Helmet>
           <title>Search Products</title>

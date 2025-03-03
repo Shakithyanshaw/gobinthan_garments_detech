@@ -4,11 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
-
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CheckoutSteps from '../components/CheckoutSteps';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -63,7 +62,7 @@ export default function ShippingAddressScreen() {
 
   return (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <div className="marginAll">
         <Helmet>
           <title>Shipping Address</title>

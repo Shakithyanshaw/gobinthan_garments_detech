@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { getError } from '../Util';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -72,7 +72,7 @@ export default function ProfileScreen() {
 
   return (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <div style={smallContainerStyle} className="container ">
         <Helmet>
           <title>User Profile</title>

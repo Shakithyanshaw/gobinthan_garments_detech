@@ -8,7 +8,7 @@ import { Card, Col, ListGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getError } from '../Util';
 import MessageBox from '../components/MeaasgeBox';
-import Header from '../components/Header1';
+import CardHeader from '../components/CardHeadder';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -62,7 +62,7 @@ export default function OrderScreen() {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div className="d-flex flex-column site-container">
-      <Header />
+      <CardHeader />
       <div className="marginAll">
         <Helmet>
           <title>Order {orderId}</title>
