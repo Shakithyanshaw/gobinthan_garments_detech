@@ -7,7 +7,6 @@ const productSchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true },
     category: { type: String, required: true },
     colour: { type: String, required: true }, // Added colour field
-    size: { type: String, required: true }, // Added size field
     image: { type: String, required: true },
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },

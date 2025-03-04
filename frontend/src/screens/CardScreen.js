@@ -77,7 +77,7 @@ export default function CartScreen() {
                         <Col md={3}>
                           <Button
                             onClick={() =>
-                              updateCartHandler(item, item.quantity - 5)
+                              updateCartHandler(item, item.quantity - 10)
                             }
                             variant="light"
                             disabled={item.quantity === 1}
@@ -88,7 +88,7 @@ export default function CartScreen() {
                           <Button
                             variant="light"
                             onClick={() =>
-                              updateCartHandler(item, item.quantity + 5)
+                              updateCartHandler(item, item.quantity + 10)
                             }
                             disabled={item.quantity === item.countInStock}
                           >

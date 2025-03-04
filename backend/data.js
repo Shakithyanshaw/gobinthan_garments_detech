@@ -24,10 +24,10 @@ const data = {
       slug: 'Ladies-Casual-Wear',
       category: 'Ladies Casual Wear',
       colour: 'white',
-      size: 'L',
+
       image: '/images/Ladies_Casual_Wear.png', // 679px × 829px
       price: 120000,
-      countInStock: 10,
+      countInStock: 100000,
       brand: 'Gobinthan Garments',
       rating: 4.5,
       numReviews: 10,
@@ -41,12 +41,12 @@ const data = {
       slug: 'Ladies-Home-Wear',
       category: 'Ladies Home Wear',
       colour: 'white',
-      size: 'XL',
+
       image: '/images/Ladies_Home_Wear.png', // 679px × 829px
       price: 120000,
-      countInStock: 0,
+      countInStock: 100000,
       brand: 'Gobinthan Garments',
-      rating: 4.5,
+      rating: 4,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
       fabric: 'Thin and smooth',
@@ -58,12 +58,12 @@ const data = {
       slug: 'Ladies-Fashion-Wear',
       category: 'Ladies Fashion Wear',
       colour: 'white',
-      size: 'M',
+
       image: '/images/Ladies_Fashion_Wear.png', // 679px × 829px
       price: 120000,
-      countInStock: 10,
+      countInStock: 100000,
       brand: 'Gobinthan Garments',
-      rating: 4.5,
+      rating: 5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
       fabric: 'Thick Leather',
@@ -75,10 +75,10 @@ const data = {
       slug: 'Customizable-T-Shirts',
       category: 'Customizable T-Shirts',
       colour: 'white',
-      size: 'L',
+
       image: '/images/Customizable_tshirts.png', // 679px × 829px
       price: 120000,
-      countInStock: 10,
+      countInStock: 100000,
       brand: 'Gobinthan Garments',
       rating: 4.5,
       numReviews: 10,
@@ -92,12 +92,12 @@ const data = {
       slug: 'School-Uniforms',
       category: 'School Uniforms',
       colour: 'white',
-      size: 'XL',
+
       image: '/images/School_Uniforms.png', // 679px × 829px
       price: 120000,
-      countInStock: 10,
+      countInStock: 100000,
       brand: 'Gobinthan Garments',
-      rating: 4.5,
+      rating: 3,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
       fabric: 'Smooth',
@@ -109,12 +109,12 @@ const data = {
       slug: 'Bed-Clothes',
       category: 'Bed Clothes',
       colour: 'white',
-      size: 'S',
+
       image: '/images/Bed_Clothes.png', // 679px × 829px
       price: 120000,
-      countInStock: 10,
+      countInStock: 100000,
       brand: 'Gobinthan Garments',
-      rating: 4.5,
+      rating: 4,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
       fabric: 'Silky',
