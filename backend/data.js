@@ -23,8 +23,6 @@ const data = {
       code: 'LCW001',
       slug: 'Ladies-Casual-Wear',
       category: 'Ladies Casual Wear',
-      colour: 'white',
-
       image: '/images/Ladies_Casual_Wear.png', // 679px × 829px
       price: 120000,
       countInStock: 100000,
@@ -32,7 +30,68 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
-      fabric: 'Soft & smooth',
+      fabric: 'Cotton',
+      sizes: [
+        {
+          size: 'S',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'M',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'L',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+          ],
+        },
+        {
+          size: '1XL',
+          colors: [
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '2XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '3XL',
+          colors: [{ color: 'Red', quantity: 5000 }],
+        },
+        {
+          size: '4XL',
+          colors: [
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+      ],
     },
     {
       // _id: '2',
@@ -40,8 +99,6 @@ const data = {
       code: 'LHW001',
       slug: 'Ladies-Home-Wear',
       category: 'Ladies Home Wear',
-      colour: 'white',
-
       image: '/images/Ladies_Home_Wear.png', // 679px × 829px
       price: 120000,
       countInStock: 100000,
@@ -49,7 +106,68 @@ const data = {
       rating: 4,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
-      fabric: 'Thin and smooth',
+      fabric: 'Polyester',
+      sizes: [
+        {
+          size: 'S',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'M',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'L',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+          ],
+        },
+        {
+          size: '1XL',
+          colors: [
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '2XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '3XL',
+          colors: [{ color: 'Red', quantity: 5000 }],
+        },
+        {
+          size: '4XL',
+          colors: [
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+      ],
     },
     {
       // _id: '3',
@@ -57,8 +175,6 @@ const data = {
       code: 'LFW001',
       slug: 'Ladies-Fashion-Wear',
       category: 'Ladies Fashion Wear',
-      colour: 'white',
-
       image: '/images/Ladies_Fashion_Wear.png', // 679px × 829px
       price: 120000,
       countInStock: 100000,
@@ -66,7 +182,68 @@ const data = {
       rating: 5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
-      fabric: 'Thick Leather',
+      fabric: 'Silk',
+      sizes: [
+        {
+          size: 'S',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'M',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'L',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+          ],
+        },
+        {
+          size: '1XL',
+          colors: [
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '2XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '3XL',
+          colors: [{ color: 'Red', quantity: 5000 }],
+        },
+        {
+          size: '4XL',
+          colors: [
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+      ],
     },
     {
       // _id: '4',
@@ -74,8 +251,6 @@ const data = {
       code: 'CTS001',
       slug: 'Customizable-T-Shirts',
       category: 'Customizable T-Shirts',
-      colour: 'white',
-
       image: '/images/Customizable_tshirts.png', // 679px × 829px
       price: 120000,
       countInStock: 100000,
@@ -83,7 +258,68 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
-      fabric: 'Silky and Smooth',
+      fabric: 'Leather',
+      sizes: [
+        {
+          size: 'S',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'M',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'L',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+          ],
+        },
+        {
+          size: '1XL',
+          colors: [
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '2XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '3XL',
+          colors: [{ color: 'Red', quantity: 5000 }],
+        },
+        {
+          size: '4XL',
+          colors: [
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+      ],
     },
     {
       // _id: '5',
@@ -91,8 +327,6 @@ const data = {
       code: 'SU001',
       slug: 'School-Uniforms',
       category: 'School Uniforms',
-      colour: 'white',
-
       image: '/images/School_Uniforms.png', // 679px × 829px
       price: 120000,
       countInStock: 100000,
@@ -100,7 +334,68 @@ const data = {
       rating: 3,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
-      fabric: 'Smooth',
+      fabric: 'Linen',
+      sizes: [
+        {
+          size: 'S',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'M',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'L',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+          ],
+        },
+        {
+          size: '1XL',
+          colors: [
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '2XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '3XL',
+          colors: [{ color: 'Red', quantity: 5000 }],
+        },
+        {
+          size: '4XL',
+          colors: [
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+      ],
     },
     {
       //_id: '6',
@@ -108,8 +403,6 @@ const data = {
       code: 'BC001',
       slug: 'Bed-Clothes',
       category: 'Bed Clothes',
-      colour: 'white',
-
       image: '/images/Bed_Clothes.png', // 679px × 829px
       price: 120000,
       countInStock: 100000,
@@ -117,7 +410,68 @@ const data = {
       rating: 4,
       numReviews: 10,
       description: 'high quality and stylish Stage Background',
-      fabric: 'Silky',
+      fabric: 'Cotton',
+      sizes: [
+        {
+          size: 'S',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'M',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'L',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: 'XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+          ],
+        },
+        {
+          size: '1XL',
+          colors: [
+            { color: 'Blue', quantity: 5000 },
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '2XL',
+          colors: [
+            { color: 'Red', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+        {
+          size: '3XL',
+          colors: [{ color: 'Red', quantity: 5000 }],
+        },
+        {
+          size: '4XL',
+          colors: [
+            { color: 'Black', quantity: 5000 },
+            { color: 'Green', quantity: 5000 },
+          ],
+        },
+      ],
     },
   ],
 };

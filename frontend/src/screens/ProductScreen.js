@@ -80,22 +80,33 @@ function ProductScreen() {
       <Container className="mt-5">
         <div>
           <Row>
-            <Col md={5}>
+            <Col md={6}>
               <img
                 className="img-large"
                 src={product.image}
                 alt={product.name}
               ></img>
             </Col>
-            <Col md={4}>
+            <Col md={5}>
               <ListGroup>
                 <ListGroup.Item>
                   <Helmet>
                     <title>{product.name}</title>
                   </Helmet>
-                  <h1 style={{ fontSize: '2rem' }}>{product.name}</h1>
+                  <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>
+                    {product.name}
+                  </h1>
                 </ListGroup.Item>
-                <ListGroup.Item>ID :- {product.code}</ListGroup.Item>
+                <ListGroup.Item
+                  style={{
+                    color: '#801001',
+                    fontSize: '1.5rem',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  ID :- {product.code}
+                </ListGroup.Item>
+
                 <ListGroup.Item>
                   <Rating
                     rating={product.rating}
@@ -103,7 +114,7 @@ function ProductScreen() {
                   ></Rating>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <strong> Fabric Short Detail :-</strong>
+                  <strong> Fabric Detail :-</strong>
                   <p>{product.fabric}</p>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -111,8 +122,6 @@ function ProductScreen() {
                   <p>{product.description}</p>
                 </ListGroup.Item>
               </ListGroup>
-            </Col>
-            <Col md={3}>
               <Card>
                 <Card.Body>
                   <ListGroup variant="flush">

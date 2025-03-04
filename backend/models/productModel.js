@@ -6,7 +6,6 @@ const productSchema = new mongoose.Schema(
     code: { type: String, required: true, unique: true }, // Added code field
     slug: { type: String, required: true, unique: true },
     category: { type: String, required: true },
-    colour: { type: String, required: true }, // Added colour field
     image: { type: String, required: true },
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
@@ -15,6 +14,17 @@ const productSchema = new mongoose.Schema(
     numReviews: { type: Number, required: true },
     description: { type: String, required: true },
     fabric: { type: String, required: true }, // Added fabric field
+    sizes: [
+      {
+        size: { type: String, required: true }, // Example: 'S', 'M', 'L', 'XL'
+        colors: [
+          {
+            color: { type: String, required: true }, // Example: 'Red', 'Blue', 'Black'
+            quantity: { type: Number, required: true }, // Available quantity for this color
+          },
+        ],
+      },
+    ],
   },
   {
     timestamps: true,
