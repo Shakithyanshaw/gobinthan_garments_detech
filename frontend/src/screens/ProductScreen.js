@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext, useEffect, useReducer } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/esm/Col';
@@ -7,7 +7,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import Rating from '../components/Rating';
 import Button from 'react-bootstrap/esm/Button';
-import Badge from 'react-bootstrap/Badge';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MeaasgeBox';
@@ -15,6 +14,7 @@ import { getError } from '../Util';
 import { Store } from '../Store';
 import CardHeader from '../components/CardHeadder';
 import { Container } from 'react-bootstrap';
+import { assets } from '../assets/assets';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -70,6 +70,8 @@ function ProductScreen() {
     navigate('/cart');
   };
 
+  const [selectedSize, setSelectedSize] = useState(null);
+
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -122,33 +124,54 @@ function ProductScreen() {
                   <p>{product.description}</p>
                 </ListGroup.Item>
               </ListGroup>
-              <Card>
+              <Card style={{ marginTop: '20px' }}>
                 <Card.Body>
                   <ListGroup variant="flush">
                     <ListGroup.Item>
                       <Row>
-                        <Col>Price:</Col>
-                        <Col>Rs{product.price}</Col>
-                      </Row>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Status:</Col>
-                        <Col>
-                          {product.countInStock > 0 ? (
-                            <Badge bg="success">Available</Badge>
-                          ) : (
-                            <Badge bg="danger">Unavailable</Badge>
-                          )}
+                        <Col md={2}>Size:</Col>
+                        <Col md={10}>
+                          <div className="d-flex flex-wrap">
+                            {product.sizes.map((size) => (
+                              <div
+                                key={size.size}
+                                className="p-3" // Padding inside the box
+                                style={{
+                                  border: '1px solid #ddd',
+                                  borderRadius: '5px',
+                                  margin: '5px',
+                                  cursor: 'pointer',
+                                  backgroundColor:
+                                    selectedSize === size.size
+                                      ? '#801001'
+                                      : '#f8f9fa',
+                                  color:
+                                    selectedSize === size.size
+                                      ? 'white'
+                                      : 'black',
+                                  fontSize: '16px', // Font size inside the box
+                                  width: '30px', // Set fixed width for all boxes
+                                  height: '30px', // Set fixed height for all boxes
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center', // Center text inside the box
+                                  textAlign: 'center', // Ensure the text is centered properly
+                                }}
+                                onClick={() => setSelectedSize(size.size)}
+                              >
+                                {size.size}
+                              </div>
+                            ))}
+                          </div>
                         </Col>
                       </Row>
                     </ListGroup.Item>
 
-                    {product.countInStock > 0 && (
+                    {product.countInStock > 0 && selectedSize && (
                       <ListGroup.Item>
                         <div className="d-grid">
                           <Button onClick={addToCartHandler} variant="primary">
-                            Add to card
+                            Add to cart
                           </Button>
                         </div>
                       </ListGroup.Item>
@@ -160,6 +183,60 @@ function ProductScreen() {
           </Row>
         </div>
       </Container>
+
+      <section
+        className="container mx-auto px-4 sm:px-6 lg:px-8 py-8"
+        id="who we are"
+      >
+        <div className="w-full max-w-none text-left">
+          {/* Changed from text-center to text-left */}
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 text-customRed">
+            Product More Descriptions
+          </h1>
+          <p className="text-gray-600 text-lg mb-8 leading-relaxed w-full">
+            As Kobithan Garments (PVT) LTD we pride ourselves on our ability to
+            craft high- quality products with efficiency and precision. We
+            employ our advanced technology techniques to craft products that
+            exceed international quality benchmarks, ensuring reliability and
+            style for global markets.
+          </p>
+        </div>
+      </section>
+
+      <section
+        className="container mx-auto px-4 sm:px-6 lg:px-8 py-8"
+        id="export-grade-stitching"
+      >
+        {/* Heading */}
+        <div className="w-full max-w-none text-left">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 text-customRed">
+            Fabric More Details
+          </h1>
+        </div>
+
+        {/* Content Section */}
+        <div className="flex flex-col lg:flex-row items-center lg:items-start">
+          {/* Text Content */}
+          <div className="lg:w-1/2 w-full text-left">
+            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+              As Kobithan Garments (PVT) LTD we pride ourselves on our ability
+              to craft high- quality products with efficiency and precision. We
+              employ our advanced technology techniques to craft products that
+              exceed international quality benchmarks, ensuring reliability and
+              style for global markets.
+            </p>
+          </div>
+
+          {/* Image Section */}
+          <div className="lg:w-1/2 w-full flex justify-center lg:justify-end">
+            <img
+              src={assets.ROAD_MAP}
+              alt="Export-Grade Stitching"
+              className="w-full max-w-sm lg:max-w-md object-cover rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
