@@ -14,6 +14,7 @@ import SearchScreen from './screens/SearchScreen';
 import Footer from './components/Footer';
 import AboutUs from './screens/AboutUs';
 import Home from './screens/Home';
+import Fabric from './screens/Fabric';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<HomeScreen />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/fabrics" element={<Fabric />} />
         <Route path="/cart" element={<CardScreen />} />
         <Route path="/signin" element={<SigninScreen />} />
         <Route path="/signup" element={<SignupScreen />} />

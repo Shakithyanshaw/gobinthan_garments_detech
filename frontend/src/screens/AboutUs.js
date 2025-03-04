@@ -93,7 +93,7 @@ const AboutUs = () => {
         id="export-grade-stitching"
       >
         {/* Heading */}
-        <div className="text-center lg:text-left">
+        <div className="text-left lg:text-left">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-customRed">
             Export-Grade Stitching
           </h1>
@@ -164,7 +164,7 @@ const AboutUs = () => {
         id="meet customer expectations within deadline"
       >
         {/* Heading */}
-        <div className="text-center lg:text-left">
+        <div className="text-left lg:text-left">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-customRed">
             Meet customer expectations within deadline
           </h1>
