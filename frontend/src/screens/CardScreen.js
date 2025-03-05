@@ -50,7 +50,7 @@ export default function CartScreen() {
           </Helmet>
           <h1 style={{ fontSize: '2rem' }}>Shopping Cart</h1> <br />
           <Row>
-            <Col md={8}>
+            <Col md={9}>
               {cartItems.length === 0 ? (
                 <MessageBox>
                   Dear valuable customer, Your Cart is empty.
@@ -61,43 +61,68 @@ export default function CartScreen() {
                   {cartItems.map((item) => (
                     <ListGroupItem key={item._id}>
                       <Row className="align-items-center">
-                        <Col md={4}>
+                        {/* Image and Name in the Same Line */}
+                        <Col md={5} className="d-flex align-items-center gap-3">
                           <img
                             src={item.image}
                             alt={item.name}
                             className="img-fluid rounded img-thumbnail"
-                          ></img>{' '}
+                            style={{
+                              width: '100px',
+                              height: '100px',
+                              objectFit: 'cover',
+                            }}
+                          />
                           <Link
                             className="cardname"
                             to={`/product/${item._id}`}
                           >
-                            {item.name}
+                            <strong style={{ color: '#801001' }}>
+                              {item.name}
+                            </strong>
                           </Link>
                         </Col>
-                        <Col md={3}>
+
+                        {/* ID, Size, Quantity Controls, and Delete Button in the Same Line */}
+                        <Col
+                          md={7}
+                          className="d-flex align-items-center justify-content-between flex-wrap gap-2"
+                        >
+                          <strong style={{ color: '#801001' }}>
+                            ID: {item.code}
+                          </strong>
+                          <strong style={{ color: '#801001' }}>
+                            Size: {item.selectedSize}
+                          </strong>
+
+                          {/* Quantity Controls */}
+                          <div className="d-flex align-items-center gap-2">
+                            <Button
+                              style={{ color: '#801001' }}
+                              onClick={() =>
+                                updateCartHandler(item, item.quantity - 10)
+                              }
+                              variant="light"
+                              disabled={item.quantity === 1}
+                            >
+                              <i className="fas fa-minus-circle"></i>
+                            </Button>
+                            <span>{item.quantity}</span>
+                            <Button
+                              style={{ color: '#801001' }}
+                              variant="light"
+                              onClick={() =>
+                                updateCartHandler(item, item.quantity + 10)
+                              }
+                              disabled={item.quantity === item.countInStock}
+                            >
+                              <i className="fas fa-plus-circle"></i>
+                            </Button>
+                          </div>
+
+                          {/* Remove Button */}
                           <Button
-                            onClick={() =>
-                              updateCartHandler(item, item.quantity - 10)
-                            }
-                            variant="light"
-                            disabled={item.quantity === 1}
-                          >
-                            <i className="fas fa-minus-circle"></i>
-                          </Button>{' '}
-                          <span>{item.quantity}</span>{' '}
-                          <Button
-                            variant="light"
-                            onClick={() =>
-                              updateCartHandler(item, item.quantity + 10)
-                            }
-                            disabled={item.quantity === item.countInStock}
-                          >
-                            <i className="fas fa-plus-circle"></i>
-                          </Button>
-                        </Col>
-                        <Col md={3}>ID :- {item.code}</Col>
-                        <Col md={2}>
-                          <Button
+                            style={{ color: '#801001' }}
                             onClick={() => removeItemHandler(item)}
                             variant="light"
                           >
@@ -110,7 +135,8 @@ export default function CartScreen() {
                 </ListGroup>
               )}
             </Col>
-            <Col md={4}>
+
+            <Col md={3}>
               <Card>
                 <Card.Body>
                   <ListGroup variant="flush">
