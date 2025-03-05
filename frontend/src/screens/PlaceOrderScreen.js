@@ -99,18 +99,27 @@ export default function PlaceOrderScreen() {
           <Row>
             <Col md={8}>
               <Row>
-                <Col md={6}>
-                  <Card className="mb-3 mt-5 bg-light text-dark">
+                <Col md={6} className="d-flex">
+                  <Card className="mb-3 mt-5 bg-light text-dark w-100 h-90">
                     <Card.Body>
-                      <Card.Title>Shipping</Card.Title>
+                      <Card.Title style={{ color: '#801001' }}>
+                        Shipping
+                      </Card.Title>
                       <Card.Text>
                         <strong>Name:-</strong> {cart.shippingAddress.fullName}{' '}
                         <br />
-                        <strong>Address:- </strong>{' '}
-                        {cart.shippingAddress.address},
-                        {cart.shippingAddress.city},
-                        {cart.shippingAddress.postalCode},
+                        <strong>Address:- </strong>
+                        {cart.shippingAddress.address},{' '}
+                        {cart.shippingAddress.city},{' '}
+                        {cart.shippingAddress.postalCode},{' '}
                         {cart.shippingAddress.country}
+                        <br />
+                      </Card.Text>
+                      <Card.Text>
+                        <strong>Whatsapp Number:-</strong>{' '}
+                        {cart.shippingAddress.whatsapp} <br />
+                        <strong>Email Address:- </strong>{' '}
+                        {cart.shippingAddress.email}
                         <br />
                       </Card.Text>
                       <Link className="custom-btn" to="/shipping">
@@ -119,14 +128,17 @@ export default function PlaceOrderScreen() {
                     </Card.Body>
                   </Card>
                 </Col>
-                <Col md={6}>
-                  <Card className="mb-3 mt-5 bg-light text-dark">
+
+                <Col md={6} className="d-flex">
+                  <Card className="mb-3 mt-5 bg-light text-dark w-100 h-90">
                     <Card.Body>
-                      <Card.Title>Enquiry Method</Card.Title>
-                      <Card.Text className="mt-4">
+                      <Card.Title style={{ color: '#801001' }}>
+                        Enquiry Method
+                      </Card.Title>
+                      <Card.Text className="mt-8">
                         <strong>Method:</strong> {cart.enquiryMethod}
                       </Card.Text>
-                      <Link className="custom-btn" to="/payment">
+                      <Link className="custom-btn mt-10" to="/payment">
                         Edit
                       </Link>
                     </Card.Body>
@@ -134,83 +146,81 @@ export default function PlaceOrderScreen() {
                 </Col>
               </Row>
             </Col>
-            <Col md={4}>
-              <Card className="bg-light mt-5 text-dark">
-                <Card.Body>
-                  <Card.Title>Order Summary</Card.Title>
-                  <ListGroup variant="flush">
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Items</Col>
-                        <Col>Rs {cart.itemsPrice.toFixed(2)}</Col>
-                      </Row>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Shipping</Col>
-                        <Col>Rs {cart.shippingPrice.toFixed(2)}</Col>
-                      </Row>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>
-                          <strong> Order Total</strong>
-                        </Col>
-                        <Col>
-                          <strong>Rs {cart.totalPrice.toFixed(2)}</strong>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <div className="d-grid">
-                        <Button
-                          type="button"
-                          onClick={placeOrderHandler}
-                          disabled={cart.cartItems.length === 0}
-                        >
-                          Place Order
-                        </Button>
-                      </div>
-                      {loading && <LoadingBox></LoadingBox>}
-                    </ListGroup.Item>
-                  </ListGroup>
-                </Card.Body>
-              </Card>
-            </Col>
           </Row>
 
-          <Col md={8}>
+          <Col>
             <Card className="mb-3 bg-light text-dark">
               <Card.Body>
-                <Card.Title>Items</Card.Title>
+                <Card.Title style={{ color: '#801001' }}>Items</Card.Title>
+
                 <ListGroup variant="flush">
                   {cart.cartItems.map((item) => (
                     <ListGroup.Item key={item._id}>
                       <Row className="align-items-center">
-                        <Col md={7}>
+                        {/* Image and Name */}
+                        <Col md={5} className="d-flex align-items-center gap-3">
                           <img
                             src={item.image}
                             alt={item.name}
                             className="img-fluid rounded img-thumbnail"
-                          ></img>{' '}
+                            style={{
+                              width: '100px',
+                              height: '100px',
+                              objectFit: 'cover',
+                            }}
+                          />
                           <Link
-                            className="linkstyle ml-5"
+                            className="cardname"
                             to={`/product/${item.slug}`}
                           >
-                            <strong>{item.name}</strong>
+                            <strong style={{ color: '#801001' }}>
+                              {item.name}
+                            </strong>
                           </Link>
                         </Col>
-                        <Col md={2}>
-                          <span>{item.quantity}</span>
+
+                        {/* ID, Size, Quantity Controls, and Delete Button */}
+                        <Col
+                          md={7}
+                          className="d-flex align-items-center justify-content-between flex-wrap gap-2"
+                        >
+                          <strong style={{ color: '#801001' }}>
+                            ID: {item.code}
+                          </strong>
+                          {item.selectedSize && (
+                            <strong style={{ color: '#801001' }}>
+                              Size: {item.selectedSize}
+                            </strong>
+                          )}
+
+                          {/* Quantity Controls */}
+                          <div className="d-flex align-items-center gap-2">
+                            <span>{item.quantity}</span>
+                          </div>
                         </Col>
-                        <Col md={3}>ID:- {item.code}</Col>
                       </Row>
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
-                <Link className="custom-btn" to="/cart">
-                  Edit
-                </Link>
+
+                <div className="d-flex justify-content-between mt-3">
+                  <Link className="custom-btn" to="/cart">
+                    Edit
+                  </Link>
+                  <ListGroup.Item className="mt-3">
+                    <div className="d-grid">
+                      <Button
+                        type="button"
+                        onClick={placeOrderHandler}
+                        disabled={cart.cartItems.length === 0}
+                        className="btn btn-primary"
+                      >
+                        Place Order
+                      </Button>
+                    </div>
+                    {loading && <LoadingBox />}
+                  </ListGroup.Item>
+                </div>
               </Card.Body>
             </Card>
           </Col>
