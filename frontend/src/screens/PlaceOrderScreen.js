@@ -78,7 +78,7 @@ export default function PlaceOrderScreen() {
   };
 
   useEffect(() => {
-    if (!cart.paymentMethod) {
+    if (!cart.enquiryMethod) {
       navigate('/payment');
     }
   }, [cart, navigate]);
@@ -122,9 +122,9 @@ export default function PlaceOrderScreen() {
                 <Col md={6}>
                   <Card className="mb-3 mt-5 bg-light text-dark">
                     <Card.Body>
-                      <Card.Title>Payment Method</Card.Title>
+                      <Card.Title>Enquiry Method</Card.Title>
                       <Card.Text className="mt-4">
-                        <strong>Method:</strong> {cart.paymentMethod}
+                        <strong>Method:</strong> {cart.enquiryMethod}
                       </Card.Text>
                       <Link className="custom-btn" to="/payment">
                         Edit

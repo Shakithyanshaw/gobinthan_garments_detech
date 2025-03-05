@@ -31,7 +31,7 @@ const Categories = () => {
       image: assets.School_Uniforms,
       link: '/',
     },
-    { name: 'Bed Clothes', image: assets.Bed_Clothes, link: '/bed-clothes' },
+    { name: 'Bed Clothes', image: assets.Bed_Clothes, link: '/' },
   ];
 
   return (

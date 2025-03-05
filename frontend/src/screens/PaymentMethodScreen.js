@@ -8,29 +8,29 @@ import { Store } from '../Store';
 import CardHeader from '../components/CardHeadder';
 import { Container } from 'react-bootstrap';
 
-export default function PaymentMethodScreen() {
-  const Navigate = useNavigate();
+export default function EnquiryMethodScreen() {
+  const navigate = useNavigate();
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
-    cart: { shippingAddress, paymentMethod },
+    cart: { shippingAddress, enquiryMethod },
   } = state;
 
-  const [paymentMethodName, setPaymentMethod] = useState(
-    paymentMethod || 'PayPal'
+  const [enquiryMethodName, setEnquiryMethod] = useState(
+    enquiryMethod || 'WhatsApp'
   );
 
   useEffect(() => {
     if (!shippingAddress.address) {
-      Navigate('/shipping');
+      navigate('/shipping');
     }
-  }, [shippingAddress, Navigate]);
+  }, [shippingAddress, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName });
-    localStorage.setItem('paymentMethod', paymentMethodName);
-    Navigate('/placeorder');
+    ctxDispatch({ type: 'SAVE_ENQUIRY_METHOD', payload: enquiryMethodName });
+    localStorage.setItem('enquiryMethod', enquiryMethodName);
+    navigate('/placeorder');
   };
 
   const smallContainerStyle = {
@@ -45,30 +45,30 @@ export default function PaymentMethodScreen() {
           <CheckoutSteps step1 step2 step3></CheckoutSteps>
           <div style={smallContainerStyle} className="container">
             <Helmet>
-              <title>Payment Method</title>
+              <title>Enquiry Method</title>
             </Helmet>
             <br />
-            <h1 style={{ fontSize: '2rem' }}>Payment Method</h1>
+            <h1 style={{ fontSize: '2rem' }}>Enquiry Method</h1>
             <br />
             <Form onSubmit={submitHandler}>
               <div className="mb-3">
                 <Form.Check
                   type="radio"
-                  id="PayPal"
-                  label="PayPal"
-                  value="PayPal"
-                  checked={paymentMethodName === 'PayPal'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  id="WhatsApp"
+                  label="WhatsApp"
+                  value="WhatsApp"
+                  checked={enquiryMethodName === 'WhatsApp'}
+                  onChange={(e) => setEnquiryMethod(e.target.value)}
                 />
               </div>
               <div className="mb-3">
                 <Form.Check
                   type="radio"
-                  id="COD"
-                  label="Cash On Delivery"
-                  value="COD"
-                  checked={paymentMethodName === 'COD'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  id="Email"
+                  label="Email"
+                  value="Email"
+                  checked={enquiryMethodName === 'Email'}
+                  onChange={(e) => setEnquiryMethod(e.target.value)}
                 />
               </div>
               <div className="mb-3">
