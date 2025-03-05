@@ -25,6 +25,9 @@ export default function ShippingAddressScreen() {
   const [postalCode, setPostalCode] = useState(
     shippingAddress.postalCode || ''
   );
+  const [whatsapp, setWhatsapp] = useState(shippingAddress.whatsapp || '');
+  const [email, setEmail] = useState(shippingAddress.email || '');
+
   useEffect(() => {
     if (!userInfo) {
       navigate(`/signin?redirect=/shipping`);
@@ -42,6 +45,8 @@ export default function ShippingAddressScreen() {
         city,
         postalCode,
         country,
+        whatsapp,
+        email,
       },
     });
     localStorage.setItem(
@@ -52,6 +57,8 @@ export default function ShippingAddressScreen() {
         city,
         postalCode,
         country,
+        whatsapp,
+        email,
       })
     );
     navigate('/payment');
@@ -126,6 +133,30 @@ export default function ShippingAddressScreen() {
                 />
               </Form.Group>
 
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3" controlId="whatsapp" as={Col}>
+                    <Form.Label>WhatsApp Number</Form.Label>
+                    <Form.Control
+                      type="tel"
+                      value={whatsapp}
+                      onChange={(e) => setWhatsapp(e.target.value)}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group className="mb-3" controlId="email" as={Col}>
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
               <div className="mb-3">
                 <Button type="submit">Continue</Button>
               </div>
