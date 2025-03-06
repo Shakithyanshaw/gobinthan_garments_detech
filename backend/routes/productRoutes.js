@@ -17,7 +17,9 @@ productRouter.get(
     const pageSize = query.pageSize || PAGE_SIZE;
     const page = query.page || 1;
     const category = query.category || '';
-    const price = query.price || '';
+    const size = query.size || '';
+    const color = query.color || '';
+    const fabric = query.fabric || '';
     const rating = query.rating || '';
     const order = query.order || '';
     const searchQuery = query.query || '';
@@ -25,35 +27,47 @@ productRouter.get(
     const queryFilter =
       searchQuery && searchQuery !== 'all'
         ? {
-            name: {
-              $regex: searchQuery,
-              $options: 'i',
-            },
+            name: { $regex: searchQuery, $options: 'i' },
           }
         : {};
+
     const categoryFilter = category && category !== 'all' ? { category } : {};
     const ratingFilter =
-      rating && rating !== 'all'
+      rating && rating !== 'all' ? { rating: { $gte: Number(rating) } } : {};
+    const fabricFilter = fabric && fabric !== 'all' ? { fabric } : {};
+
+    // Updated size filter with quantity check
+    const sizeFilter =
+      size && size !== 'all'
         ? {
-            rating: {
-              $gte: Number(rating),
+            sizes: {
+              $elemMatch: {
+                size: size,
+                'colors.quantity': { $gt: 0 },
+              },
             },
           }
         : {};
-    const priceFilter =
-      price && price !== 'all'
+
+    // Updated color filter with quantity check
+    const colorFilter =
+      color && color !== 'all'
         ? {
-            // 1-50
-            price: {
-              $gte: Number(price.split('-')[0]),
-              $lte: Number(price.split('-')[1]),
+            sizes: {
+              $elemMatch: {
+                colors: {
+                  $elemMatch: {
+                    color: color,
+                    quantity: { $gt: 0 },
+                  },
+                },
+              },
             },
           }
         : {};
+
     const sortOrder =
-      order === 'featured'
-        ? { featured: -1 }
-        : order === 'lowest'
+      order === 'lowest'
         ? { price: 1 }
         : order === 'highest'
         ? { price: -1 }
@@ -66,8 +80,10 @@ productRouter.get(
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
-      ...priceFilter,
       ...ratingFilter,
+      ...fabricFilter,
+      ...sizeFilter,
+      ...colorFilter,
     })
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
@@ -76,9 +92,12 @@ productRouter.get(
     const countProducts = await Product.countDocuments({
       ...queryFilter,
       ...categoryFilter,
-      ...priceFilter,
       ...ratingFilter,
+      ...fabricFilter,
+      ...sizeFilter,
+      ...colorFilter,
     });
+
     res.send({
       products,
       countProducts,
@@ -87,12 +106,52 @@ productRouter.get(
     });
   })
 );
-
 productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
     const categories = await Product.find().distinct('category');
     res.send(categories);
+  })
+);
+
+// Get available sizes with stock
+productRouter.get(
+  '/sizes',
+  expressAsyncHandler(async (req, res) => {
+    const sizes = await Product.aggregate([
+      { $unwind: '$sizes' },
+      { $unwind: '$sizes.colors' },
+      { $match: { 'sizes.colors.quantity': { $gt: 0 } } },
+      { $group: { _id: '$sizes.size' } },
+      { $project: { _id: 0, size: '$_id' } },
+      { $sort: { size: 1 } },
+    ]);
+    res.send(sizes.map((s) => s.size));
+  })
+);
+
+// Get available colors with stock
+productRouter.get(
+  '/colors',
+  expressAsyncHandler(async (req, res) => {
+    const colors = await Product.aggregate([
+      { $unwind: '$sizes' },
+      { $unwind: '$sizes.colors' },
+      { $match: { 'sizes.colors.quantity': { $gt: 0 } } },
+      { $group: { _id: '$sizes.colors.color' } },
+      { $project: { _id: 0, color: '$_id' } },
+      { $sort: { color: 1 } },
+    ]);
+    res.send(colors.map((c) => c.color));
+  })
+);
+
+// Get all available fabrics
+productRouter.get(
+  '/fabrics',
+  expressAsyncHandler(async (req, res) => {
+    const fabrics = await Product.distinct('fabric');
+    res.send(fabrics);
   })
 );
 

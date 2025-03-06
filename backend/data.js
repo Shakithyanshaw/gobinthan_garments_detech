@@ -35,7 +35,7 @@ const data = {
         {
           size: 'S',
           colors: [
-            { color: 'Red', quantity: 5000 },
+            { color: 'Red', quantity: 0 },
             { color: 'Blue', quantity: 5000 },
             { color: 'Black', quantity: 5000 },
             { color: 'Green', quantity: 5000 },

@@ -27,59 +27,24 @@ const reducer = (state, action) => {
       };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
-
     default:
       return state;
   }
 };
-
-const prices = [
-  {
-    name: 'Rs 1 to Rs 1000',
-    value: '1-1000',
-  },
-  {
-    name: 'Rs 1001 to Rs 5000',
-    value: '1001-5000',
-  },
-  {
-    name: 'Rs 5001 to Rs 10000',
-    value: '5001-10001',
-  },
-  {
-    name: 'Rs 10001 to Rs 25000',
-    value: '10001-25000',
-  },
-  {
-    name: 'Rs 25001 to Rs 50000',
-    value: '25001-50000',
-  },
-  {
-    name: 'Rs 50001 to Rs 100000',
-    value: '50001-100000',
-  },
-  {
-    name: 'Rs 100001 to Rs 500000',
-    value: '100001-500001',
-  },
-];
 
 export const ratings = [
   {
     name: '4stars & up',
     rating: 4,
   },
-
   {
     name: '3stars & up',
     rating: 3,
   },
-
   {
     name: '2stars & up',
     rating: 2,
   },
-
   {
     name: '1stars & up',
     rating: 1,
@@ -89,10 +54,12 @@ export const ratings = [
 export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const sp = new URLSearchParams(search); // /search?category=Shirts
+  const sp = new URLSearchParams(search);
   const category = sp.get('category') || 'all';
   const query = sp.get('query') || 'all';
-  const price = sp.get('price') || 'all';
+  const size = sp.get('size') || 'all';
+  const color = sp.get('color') || 'all';
+  const fabric = sp.get('fabric') || 'all';
   const rating = sp.get('rating') || 'all';
   const order = sp.get('order') || 'newest';
   const page = sp.get('page') || 1;
@@ -107,7 +74,7 @@ export default function SearchScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+          `/api/products/search?page=${page}&query=${query}&category=${category}&size=${size}&color=${color}&fabric=${fabric}&rating=${rating}&order=${order}`
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
@@ -118,29 +85,44 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query, rating]);
+  }, [category, error, order, page, query, rating, size, color, fabric]);
 
   const [categories, setCategories] = useState([]);
+  const [sizes, setSizes] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [fabrics, setFabrics] = useState([]);
+
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchFilters = async () => {
       try {
-        const { data } = await axios.get(`/api/products/categories`);
-        setCategories(data);
+        const { data: categories } = await axios.get(
+          `/api/products/categories`
+        );
+        const { data: sizeData } = await axios.get(`/api/products/sizes`);
+        const { data: colorData } = await axios.get(`/api/products/colors`);
+        const { data: fabricData } = await axios.get(`/api/products/fabrics`);
+
+        setCategories(categories);
+        setSizes(sizeData);
+        setColors(colorData);
+        setFabrics(fabricData);
       } catch (err) {
         toast.error(getError(err));
       }
     };
-    fetchCategories();
-  }, [dispatch]);
+    fetchFilters();
+  }, []);
 
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
     const filterQuery = filter.query || query;
+    const filterSize = filter.size || size;
+    const filterColor = filter.color || color;
+    const filterFabric = filter.fabric || fabric;
     const filterRating = filter.rating || rating;
-    const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    return `/search?category=${filterCategory}&query=${filterQuery}&size=${filterSize}&color=${filterColor}&fabric=${filterFabric}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
 
   return (
@@ -151,61 +133,147 @@ export default function SearchScreen() {
           <Helmet>
             <title>Search Products</title>
           </Helmet>
-          <Row className="mt-5">
+
+          {/* Category Filter at the Top */}
+          <Row className="mb-4">
+            <Col>
+              <div className="d-flex flex-wrap gap-2 overflow-auto justify-center">
+                <Button
+                  variant="outline-secondary"
+                  style={{
+                    borderColor: category === 'all' ? '#801001' : '#801001',
+                    color: category === 'all' ? 'white' : '#801001',
+                    backgroundColor:
+                      category === 'all' ? '#801001' : 'transparent',
+                    minWidth: '100px', // Ensure buttons have a minimum width
+                  }}
+                  onClick={() => navigate(getFilterUrl({ category: 'all' }))}
+                >
+                  All
+                </Button>
+                {categories.map((c) => (
+                  <Button
+                    key={c}
+                    variant="outline-secondary"
+                    style={{
+                      borderColor: c === category ? '#801001' : '#801001',
+                      color: c === category ? 'white' : '#801001',
+                      backgroundColor:
+                        c === category ? '#801001' : 'transparent',
+                      minWidth: '100px', // Ensure buttons have a minimum width
+                    }}
+                    onClick={() => navigate(getFilterUrl({ category: c }))}
+                  >
+                    {c}
+                  </Button>
+                ))}
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
             <Col md={3}>
-              <h4>Categories</h4>
-              <div className="searchCard">
-                <ul>
+              {/* Size Filter */}
+              <div className="searchCard mb-4">
+                <h4 style={{ fontSize: '2rem' }}>Size</h4>
+                <ul className="list-unstyled">
                   <li>
                     <Link
-                      className={
-                        'all' === category ? 'text-bold' : 'searchCard'
-                      }
-                      to={getFilterUrl({ category: 'all' })}
+                      className={'all' === size ? 'text-bold' : 'searchCard'}
+                      to={getFilterUrl({ size: 'all' })}
                     >
-                      Any
+                      <input
+                        type="checkbox"
+                        checked={'all' === size}
+                        readOnly
+                      />
+                      All Sizes
                     </Link>
                   </li>
-                  {categories.map((c) => (
+                  {sizes.map((s) => (
+                    <li key={s}>
+                      <Link
+                        className={s === size ? 'text-bold' : 'searchCard'}
+                        to={getFilterUrl({ size: s })}
+                      >
+                        <input type="checkbox" checked={s === size} readOnly />
+                        {s}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Color Filter */}
+              <div className="searchCard mb-4">
+                <h4 style={{ fontSize: '2rem' }}>Color</h4>
+                <ul className="list-unstyled">
+                  <li>
+                    <Link
+                      className={'all' === color ? 'text-bold' : 'searchCard'}
+                      to={getFilterUrl({ color: 'all' })}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={'all' === color}
+                        readOnly
+                      />
+                      All Colors
+                    </Link>
+                  </li>
+                  {colors.map((c) => (
                     <li key={c}>
                       <Link
-                        className={c === category ? 'text-bold' : 'searchCard'}
-                        to={getFilterUrl({ category: c })}
+                        className={c === color ? 'text-bold' : 'searchCard'}
+                        to={getFilterUrl({ color: c })}
                       >
+                        <input type="checkbox" checked={c === color} readOnly />
                         {c}
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="searchCard">
-                <h4>Price</h4>
-                <ul>
-                  <li className="searchCard">
+
+              {/* Fabric Filter */}
+              <div className="searchCard mb-4">
+                <h4 style={{ fontSize: '2rem' }}>Fabric</h4>
+                <ul className="list-unstyled">
+                  <li>
                     <Link
-                      className={'all' === price ? 'text-bold' : 'searchCard'}
-                      to={getFilterUrl({ price: 'all' })}
+                      className={'all' === fabric ? 'text-bold' : 'searchCard'}
+                      to={getFilterUrl({ fabric: 'all' })}
                     >
-                      Any
+                      <input
+                        type="checkbox"
+                        checked={'all' === fabric}
+                        readOnly
+                      />
+                      All Fabrics
                     </Link>
                   </li>
-                  {prices.map((p) => (
-                    <li key={p.value}>
+                  {fabrics.map((f) => (
+                    <li key={f}>
                       <Link
-                        to={getFilterUrl({ price: p.value })}
-                        className={
-                          p.value === price ? 'text-bold ' : 'searchCard'
-                        }
+                        className={f === fabric ? 'text-bold' : 'searchCard'}
+                        to={getFilterUrl({ fabric: f })}
                       >
-                        {p.name}
+                        <input
+                          type="checkbox"
+                          checked={f === fabric}
+                          readOnly
+                        />
+                        {f}
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div>
-                <h4>Avg. Customer Review</h4>
-                <ul>
+
+              {/* Rating Filter */}
+              <div className="searchCard">
+                <h4 style={{ fontSize: '2rem' }}>Rating</h4>
+                <ul className="list-unstyled">
                   {ratings.map((r) => (
                     <li key={r.name}>
                       <Link
@@ -231,9 +299,10 @@ export default function SearchScreen() {
                 </ul>
               </div>
             </Col>
+
             <Col md={9}>
               {loading ? (
-                <LoadingBox></LoadingBox>
+                <LoadingBox />
               ) : error ? (
                 <MessageBox variant="danger">{error}</MessageBox>
               ) : (
@@ -244,12 +313,16 @@ export default function SearchScreen() {
                         {countProducts === 0 ? 'No' : countProducts} Results
                         {query !== 'all' && ' : ' + query}
                         {category !== 'all' && ' : ' + category}
-                        {price !== 'all' && ' : Price ' + price}
+                        {size !== 'all' && ' : Size ' + size}
+                        {color !== 'all' && ' : Color ' + color}
+                        {fabric !== 'all' && ' : Fabric ' + fabric}
                         {rating !== 'all' && ' : Rating ' + rating + ' & up'}
-                        {query !== 'all' ||
-                        category !== 'all' ||
-                        rating !== 'all' ||
-                        price !== 'all' ? (
+                        {(query !== 'all' ||
+                          category !== 'all' ||
+                          rating !== 'all' ||
+                          size !== 'all' ||
+                          color !== 'all' ||
+                          fabric !== 'all') && (
                           <Button
                             className="closebtn"
                             variant="light"
@@ -257,7 +330,7 @@ export default function SearchScreen() {
                           >
                             <i className="fas fa-times-circle"></i>
                           </Button>
-                        ) : null}
+                        )}
                       </div>
                     </Col>
                     <Col md={6} className="text-end mt-2">
@@ -268,25 +341,21 @@ export default function SearchScreen() {
                           navigate(getFilterUrl({ order: e.target.value }));
                         }}
                       >
-                        <option className="mt-2" value="newest">
-                          Newest Arrivals
-                        </option>
-                        <option className="mt-2" value="lowest">
-                          Price: Low to High
-                        </option>
-                        <option value="highest">Price: High to Low</option>
+                        <option value="newest">Newest Arrivals</option>
+
                         <option value="toprated">Avg. Customer Reviews</option>
                       </select>
                     </Col>
                   </Row>
+
                   {products.length === 0 && (
-                    <MessageBox>No Service Found</MessageBox>
+                    <MessageBox>No Product Found</MessageBox>
                   )}
 
                   <Row>
                     {products.map((product) => (
                       <Col sm={6} lg={4} className="mb-3" key={product._id}>
-                        <Product product={product}></Product>
+                        <Product product={product} />
                       </Col>
                     ))}
                   </Row>
