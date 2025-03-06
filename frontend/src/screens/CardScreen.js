@@ -10,8 +10,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import axios from 'axios';
-import Header1 from '../components/Header1';
 import Container from 'react-bootstrap/Container';
+import CardHeader from '../components/CardHeadder';
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ export default function CartScreen() {
 
   return (
     <div>
-      <Header1 />
+      <CardHeader />
       <Container className="mt-5">
         <div>
           <Helmet>
