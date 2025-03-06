@@ -2,6 +2,7 @@ import { assets } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Categories from '../components/Categories';
+import Location from '../components/Location';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -163,6 +164,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Location />
     </div>
   );
 };
