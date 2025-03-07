@@ -75,3 +75,29 @@
     transform: translate(-50%, -50%) scale(1.1);
   }
 }
+
+/* Media Queries for Responsive Design */
+
+/* For medium screens (tablets) */
+@media (max-width: 768px) {
+  .letters {
+    font-size: 15rem; /* Smaller size for tablets */
+  }
+
+  .shape {
+    opacity: 0.5; /* Slightly more visible shapes on smaller screens */
+    animation-duration: 10s; /* Adjust animation speed */
+  }
+}
+
+/* For small screens (mobile) */
+@media (max-width: 480px) {
+  .letters {
+    font-size: 8rem; /* Even smaller size for mobile */
+  }
+
+  .shape {
+    opacity: 0.7; /* More visible shapes on mobile */
+    animation-duration: 8s; /* Adjust animation speed */
+  }
+}

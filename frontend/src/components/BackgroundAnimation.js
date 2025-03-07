@@ -1,7 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './BackgroundAnimation.css'; // Import styles
 
 const BackgroundAnimation = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Check screen size on mount and when resizing
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 480); // Consider screens 480px and below as small
+    };
+
+    checkScreenSize(); // Initial check
+    window.addEventListener('resize', checkScreenSize); // Update on resize
+
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
+
   useEffect(() => {
     const shapeContainer = document.querySelector('.animated-shapes');
 
@@ -41,12 +57,13 @@ const BackgroundAnimation = () => {
       }, 12000);
     };
 
-    const intervalShapes = setInterval(createShape, 700); // Increased shape frequency
+    // Adjust the frequency of shape creation for small screens
+    const intervalShapes = setInterval(createShape, isSmallScreen ? 1200 : 700); // Longer interval for small screens
 
     return () => {
       clearInterval(intervalShapes);
     };
-  }, []);
+  }, [isSmallScreen]); // Rerun effect if screen size changes
 
   return (
     <div className="background">
