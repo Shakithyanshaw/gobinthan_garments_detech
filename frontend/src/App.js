@@ -16,6 +16,8 @@ import AboutUs from './screens/AboutUs';
 import Home from './screens/Home';
 import Fabric from './screens/Fabric';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
+import DashboardScreen from './screens/DashboardScreen';
 
 function App() {
   return (
@@ -42,6 +44,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* Admin Routes */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <DashboardScreen />
+            </AdminRoute>
+          }
+        ></Route>
       </Routes>
 
       <Footer />

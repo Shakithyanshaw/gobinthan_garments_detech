@@ -112,3 +112,11 @@ h4 {
 .text-bold {
   font-weight: bold;
 }
+
+#admin-nav-dropdown::after {
+  border-top-color: white !important; /* White arrow for admin */
+}
+
+#collasible-nav-dropdown::after {
+  border-top-color: white !important; /* White arrow for user */
+}
