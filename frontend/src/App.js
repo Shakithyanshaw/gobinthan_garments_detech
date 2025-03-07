@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import AboutUs from './screens/AboutUs';
 import Home from './screens/Home';
 import Fabric from './screens/Fabric';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -32,8 +33,15 @@ function App() {
         <Route path="/payment" element={<PaymentMethodScreen />} />
         <Route path="/placeorder" element={<PlaceOrderScreen />} />
         <Route path="/order/:id" element={<OrderScreen />} />
-        <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/search" element={<SearchScreen />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfileScreen />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
       <Footer />

@@ -5,6 +5,7 @@ import { Store } from '../Store';
 import SearchBox from './SearchBox';
 import { Badge, NavDropdown } from 'react-bootstrap';
 import { BsCart3 } from 'react-icons/bs';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const CartNavbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -89,11 +90,6 @@ const CartNavbar = () => {
                 {/* White text */}
               </NavDropdown.Item>
 
-              <NavDropdown.Item as={Link} to="/orderhistory">
-                <span className="text-gray">Order History</span>{' '}
-                {/* White text */}
-              </NavDropdown.Item>
-
               <NavDropdown.Divider />
               <Link
                 className="dropdown-item"
@@ -107,6 +103,17 @@ const CartNavbar = () => {
             <Link className="nav-link text-white" to="/signin">
               <span className="text-white">Signin</span> {/* White text */}
             </Link>
+          )}
+
+          {userInfo && userInfo.isAdmin && (
+            <NavDropdown title="Admin" id="admin-nav-dropdown">
+              <LinkContainer to="/admin/dashboard">
+                <NavDropdown.Item>Dashboard</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/admin/products">
+                <NavDropdown.Item>Products</NavDropdown.Item>
+              </LinkContainer>
+            </NavDropdown>
           )}
         </div>
 
