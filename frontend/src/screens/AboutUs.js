@@ -1,9 +1,11 @@
 import { assets } from '../assets/assets';
+import BackgroundAnimation from '../components/BackgroundAnimation';
 import Header1 from '../components/Header1';
 
 const AboutUs = () => {
   return (
     <div className="w-full overflow-hidden">
+      <BackgroundAnimation />
       <Header1 />
       {/* Who we are */}
       <section

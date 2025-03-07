@@ -1,0 +1,77 @@
+/* Full-screen background */
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff, #f8f8f8, #e0e0e0);
+  background-size: 400% 400%;
+  animation: gradientShift 10s infinite ease-in-out;
+  z-index: -1;
+}
+
+/* Background gradient animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating animated shapes */
+.animated-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Animated Circles */
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: floatAnimation 12s infinite alternate ease-in-out;
+}
+
+/* "KG" Text - Centered and Zoom-in Animation */
+.letters {
+  font-size: 25rem;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  color: rgba(162, 162, 162, 0.2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  text-shadow: 5px 5px 15px rgba(156, 156, 156, 0.2);
+  animation: zoomIn 3s infinite alternate ease-in-out;
+}
+
+/* Floating Effect */
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-40px) translateX(30px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0px) translateX(-30px) rotate(360deg);
+  }
+}
+
+/* Zoom-in Animation for KG */
+@keyframes zoomIn {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
