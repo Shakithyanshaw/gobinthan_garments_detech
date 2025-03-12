@@ -74,7 +74,12 @@ const CartNavbar = () => {
             <BsCart3 className="text-white text-lg mr-1" />{' '}
             {/* White trolley cart icon */}
             {cart.cartItems.length > 0 && (
-              <Badge pill bg="danger" className="absolute bottom-3 left-5">
+              <Badge
+                pill
+                bg="light"
+                text="dark"
+                className="absolute bottom-3 left-5"
+              >
                 {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
               </Badge>
             )}
