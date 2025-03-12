@@ -4,7 +4,7 @@ import {
   Geographies,
   Geography,
   Marker,
-  ZoomableGroup
+  ZoomableGroup,
 } from 'react-simple-maps';
 import { geoCentroid } from 'd3-geo';
 
@@ -46,7 +46,7 @@ const MapChart = ({ selectedLocation }) => {
             ))
           }
         </Geographies>
-        
+
         {Object.entries(locations).map(([name, { coordinates }]) => (
           <Marker key={name} coordinates={coordinates}>
             <circle
@@ -76,14 +76,20 @@ export default function Location() {
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
       {/* Keep your existing sidebar structure */}
-      <div style={{ width: '250px', padding: '20px', backgroundColor: '#f8f8f8' }}>
+      <div
+        style={{ width: '250px', padding: '20px', backgroundColor: '#f8f8f8' }}
+      >
         <h3>Customer Locations</h3>
         <ul>
           {['New York', 'London', 'Tokyo'].map((location) => (
             <li
               key={location}
               onClick={() => setSelectedLocation(location)}
-              style={{ cursor: 'pointer', padding: '8px', borderBottom: '1px solid #ddd' }}
+              style={{
+                cursor: 'pointer',
+                padding: '8px',
+                borderBottom: '1px solid #ddd',
+              }}
             >
               {location}
             </li>
@@ -96,7 +102,11 @@ export default function Location() {
             <li
               key={location}
               onClick={() => setSelectedLocation(location)}
-              style={{ cursor: 'pointer', padding: '8px', borderBottom: '1px solid #ddd' }}
+              style={{
+                cursor: 'pointer',
+                padding: '8px',
+                borderBottom: '1px solid #ddd',
+              }}
             >
               {location}
             </li>

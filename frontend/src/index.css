@@ -114,9 +114,9 @@ h4 {
 }
 
 #admin-nav-dropdown::after {
-  border-top-color: white !important; /* White arrow for admin */
+  border-top-color: rgb(0, 0, 0) !important; /* White arrow for admin */
 }
 
 #collasible-nav-dropdown::after {
-  border-top-color: white !important; /* White arrow for user */
+  border-top-color: rgb(0, 0, 0) !important; /* White arrow for user */
 }

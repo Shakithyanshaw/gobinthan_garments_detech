@@ -3,7 +3,7 @@ import { assets } from '../assets/assets';
 import { Link, useLocation } from 'react-router-dom';
 import { Store } from '../Store';
 import SearchBox from './SearchBox';
-import { Badge, NavDropdown } from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
 import { BsCart3 } from 'react-icons/bs';
 
 const CartNavbar = () => {
@@ -79,44 +79,6 @@ const CartNavbar = () => {
               </Badge>
             )}
           </Link>
-          {userInfo ? (
-            <NavDropdown
-              title={<span className="text-white">{userInfo.name}</span>} // White text for dropdown title
-              id="collasible-nav-dropdown"
-            >
-              <NavDropdown.Item as={Link} to="/profile">
-                <span className="text-gray">User Profile</span>{' '}
-                {/* White text */}
-              </NavDropdown.Item>
-
-              <NavDropdown.Divider />
-              <Link
-                className="dropdown-item"
-                to="#signout"
-                onClick={signoutHandler}
-              >
-                <span className="text-gray">Signout</span> {/* White text */}
-              </Link>
-            </NavDropdown>
-          ) : (
-            <Link className="nav-link text-white" to="/signin">
-              <span className="text-white">Signin</span> {/* White text */}
-            </Link>
-          )}
-
-          {userInfo && userInfo.isAdmin && (
-            <NavDropdown
-              title={<span className="text-white">Admin</span>} // White text for dropdown title
-              id="admin-nav-dropdown"
-            >
-              <NavDropdown.Item as={Link} to="/admin/dashboard">
-                <span className="text-gray">Dashboard</span> {/* Gray text */}
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/admin/products">
-                <span className="text-gray">Products</span> {/* Gray text */}
-              </NavDropdown.Item>
-            </NavDropdown>
-          )}
         </div>
 
         <img

@@ -1,5 +1,5 @@
 //import data from '../data';
-import { useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
@@ -10,6 +10,9 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MeaasgeBox';
 import CardHeader from '../components/CardHeadder';
 import Container from 'react-bootstrap/Container';
+import { NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Store } from '../Store';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -44,6 +47,17 @@ function HomeScreen() {
     fetchData();
   }, []);
 
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+
+  const signoutHandler = () => {
+    ctxDispatch({ type: 'USER_SIGNOUT' });
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
+    window.location.href = '/signin';
+  };
+
   return (
     <div>
       <CardHeader />
@@ -52,7 +66,53 @@ function HomeScreen() {
           <Helmet>
             <title>Gobinthan Garments</title>
           </Helmet>
-          <h1 style={{ fontSize: '2rem' }}>Feature Products</h1>
+          <Row>
+            <Col md={8}>
+              <h1 style={{ fontSize: '2rem' }}>Feature Products</h1>
+            </Col>
+            <Col md={4}>
+              <div className="d-flex justify-content-end align-items-center">
+                {userInfo ? (
+                  <NavDropdown
+                    title={<span className="text-black">{userInfo.name}</span>}
+                    id="collasible-nav-dropdown"
+                  >
+                    <NavDropdown.Item as={Link} to="/profile">
+                      <span className="text-gray">User Profile</span>
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <Link
+                      className="dropdown-item"
+                      to="#signout"
+                      onClick={signoutHandler}
+                    >
+                      <span className="text-gray">Signout</span>
+                    </Link>
+                  </NavDropdown>
+                ) : (
+                  <Link className="nav-link text-black" to="/signin">
+                    <span className="text-black">Signin</span>
+                  </Link>
+                )}
+
+                {userInfo && userInfo.isAdmin && (
+                  <NavDropdown
+                    title={<span className="text-black">Admin</span>}
+                    id="admin-nav-dropdown"
+                    className="ms-3" // Adds left margin (gap) between user and admin
+                  >
+                    <NavDropdown.Item as={Link} to="/admin/dashboard">
+                      <span className="text-gray">Dashboard</span>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/admin/products">
+                      <span className="text-gray">Products</span>
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                )}
+              </div>
+            </Col>
+          </Row>
+
           <br />
           <div className="products">
             {loading ? (
