@@ -3,13 +3,38 @@ import Product from '../models/productModel.js';
 import expressAsyncHandler from 'express-async-handler';
 
 const productRouter = express.Router();
+const PAGE_SIZE = 10;
 
 productRouter.get(`/`, async (req, res) => {
   const products = await Product.find();
   res.send(products);
 });
 
-const PAGE_SIZE = 3;
+// Admin Product List Route
+productRouter.get(
+  '/admin',
+  expressAsyncHandler(async (req, res) => {
+    const { page = 1 } = req.query;
+
+    const products = await Product.find({})
+      .select(
+        'name code category rating countInStock sizes createdAt updatedAt'
+      )
+      .skip(PAGE_SIZE * (page - 1))
+      .limit(PAGE_SIZE)
+      .sort({ createdAt: -1 });
+
+    const countProducts = await Product.countDocuments({});
+
+    res.send({
+      products,
+      countProducts,
+      page: Number(page),
+      pages: Math.ceil(countProducts / PAGE_SIZE),
+    });
+  })
+);
+
 productRouter.get(
   '/search',
   expressAsyncHandler(async (req, res) => {

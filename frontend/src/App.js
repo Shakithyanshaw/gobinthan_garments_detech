@@ -18,6 +18,7 @@ import Fabric from './screens/Fabric';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import DashboardScreen from './screens/DashboardScreen';
+import ProductListScreen from './admin screen/ProductListScreen';
 
 function App() {
   return (
@@ -51,6 +52,14 @@ function App() {
           element={
             <AdminRoute>
               <DashboardScreen />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/products"
+          element={
+            <AdminRoute>
+              <ProductListScreen />
             </AdminRoute>
           }
         ></Route>
