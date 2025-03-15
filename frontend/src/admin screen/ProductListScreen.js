@@ -12,6 +12,8 @@ import { getError } from '../Util';
 import CardHeader from '../components/CardHeadder';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MeaasgeBox';
+import { Container } from 'react-bootstrap';
+import { Helmet } from 'react-helmet-async';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -115,89 +117,124 @@ export default function ProductListScreen() {
   };
 
   return (
-    <div className="marginAll">
+    <div>
       <CardHeader />
-      <Row className="align-items-center">
-        <Col>
-          <h1>Products</h1>
-        </Col>
-        <Col className="text-end">
-          <Button
-            variant="primary"
-            onClick={() => navigate('/admin/product/new')}
-          >
-            Create Product
-          </Button>
-        </Col>
-      </Row>
+      <Container>
+        <Row className="align-items-center mb-4">
+          <Helmet>
+            <title>Product Management</title>
+          </Helmet>
+          <Col>
+            <h1 style={{ fontSize: '2rem' }}>Product Management</h1>
+          </Col>
+          <Col className="text-end">
+            <Button
+              variant="primary"
+              onClick={() => navigate('/admin/product/new')}
+              className="rounded-pill px-4"
+            >
+              <i className="bi bi-plus-lg me-2"></i>
+              Create Product
+            </Button>
+          </Col>
+        </Row>
 
-      {loadingDelete && <LoadingBox />}
+        {loadingDelete && <LoadingBox />}
 
-      {loading ? (
-        <LoadingBox />
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <>
-          <Table striped bordered hover responsive>
-            <thead>
-              <tr>
-                <th>NAME</th>
-                <th>CODE</th>
-                <th>CATEGORY</th>
-                <th>RATING</th>
-                <th>STOCK</th>
-                <th>COLORS</th>
-                <th>SIZES</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product.name}</td>
-                  <td>{product.code}</td>
-                  <td>{product.category}</td>
-                  <td>
-                    <Badge bg="warning" text="dark">
-                      {product.rating} ★
-                    </Badge>
-                  </td>
-                  <td>{product.countInStock}</td>
-                  <td>{getAvailableColors(product)}</td>
-                  <td>{getAvailableSizes(product)}</td>
-                  <td>
-                    <Button
-                      variant="light"
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
-                    >
-                      Edit
-                    </Button>{' '}
-                    <Button
-                      variant="danger"
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
+        {loading ? (
+          <LoadingBox />
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <>
+            <div className="table-responsive">
+              <Table striped bordered hover className="align-middle shadow-sm">
+                <thead className="table-dark">
+                  <tr>
+                    <th className="px-4">Product Name</th>
+                    <th>SKU</th>
+                    <th>Category</th>
+                    <th>Rating</th>
+                    <th>Stock</th>
+                    <th>Colors</th>
+                    <th>Sizes</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product) => (
+                    <tr key={product._id} className="hover-highlight">
+                      <td className="fw-semibold">{product.name}</td>
+                      <td className="text-muted">{product.code}</td>
+                      <td>
+                        <Badge bg="info" className="text-uppercase">
+                          {product.category}
+                        </Badge>
+                      </td>
+                      <td>
+                        <Badge bg="warning" pill className="px-2">
+                          {product.rating} ★
+                        </Badge>
+                      </td>
+                      <td>
+                        <Badge
+                          bg={product.countInStock > 0 ? 'success' : 'danger'}
+                        >
+                          {product.countInStock}
+                        </Badge>
+                      </td>
+                      <td className="text-nowrap">
+                        <small>{getAvailableColors(product)}</small>
+                      </td>
+                      <td className="text-nowrap">
+                        <small>{getAvailableSizes(product)}</small>
+                      </td>
+                      <td>
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          className="me-2 rounded-pill px-3"
+                          onClick={() =>
+                            navigate(`/admin/product/${product._id}`)
+                          }
+                        >
+                          <i className="bi bi-pencil-square me-1"></i>
+                          Edit
+                        </Button>
+                        <Button
+                          variant="outline-danger"
+                          size="sm"
+                          className="rounded-pill px-3"
+                          onClick={() => deleteHandler(product)}
+                        >
+                          <i className="bi bi-trash me-1"></i>
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+
+            <div className="d-flex justify-content-center mt-4">
+              {[...Array(pages).keys()].map((x) => (
+                <Link
+                  key={x + 1}
+                  className={`mx-1 btn ${
+                    x + 1 === Number(page)
+                      ? 'btn-primary'
+                      : 'btn-outline-primary'
+                  } rounded-pill`}
+                  to={`/admin/products?page=${x + 1}`}
+                >
+                  {x + 1}
+                </Link>
               ))}
-            </tbody>
-          </Table>
-
-          <div className="pagination">
-            {[...Array(pages).keys()].map((x) => (
-              <Link
-                key={x + 1}
-                className={x + 1 === Number(page) ? 'btn-active' : 'btn'}
-                to={`/admin/products?page=${x + 1}`}
-              >
-                {x + 1}
-              </Link>
-            ))}
-          </div>
-        </>
-      )}
+            </div>
+          </>
+        )}
+      </Container>
     </div>
   );
 }

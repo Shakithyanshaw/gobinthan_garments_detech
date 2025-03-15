@@ -120,3 +120,24 @@ h4 {
 #collasible-nav-dropdown::after {
   border-top-color: rgb(0, 0, 0) !important; /* White arrow for user */
 }
+
+.hover-highlight:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-in-out;
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.table-dark th {
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.rounded-pill {
+  transition: all 0.2s ease;
+}
+
+.table-responsive {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
