@@ -117,13 +117,18 @@ export default function ProductListScreen() {
   const deleteHandler = async (product) => {
     if (window.confirm('Are you sure to delete?')) {
       try {
-        await axios.delete(`/api/products/${product._id}`, {
+        const response = await axios.delete(`/api/products/${product._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        toast.success('Product deleted successfully');
-        dispatch({ type: 'DELETE_SUCCESS' });
+        if (response.data.success) {
+          toast.success('Product deleted successfully');
+          dispatch({ type: 'DELETE_SUCCESS' });
+        } else {
+          throw new Error(response.data.message || 'Failed to delete product');
+        }
       } catch (error) {
-        toast.error(getError(error));
+        console.error('Error deleting product:', error.message);
+        toast.error('Failed to delete product');
         dispatch({ type: 'DELETE_FAIL' });
       }
     }

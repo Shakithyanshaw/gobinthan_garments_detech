@@ -189,6 +189,22 @@ productRouter.get(
   })
 );
 
+productRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    if (product) {
+      await product.deleteOne(); // Use deleteOne method instead of remove
+      res.status(200).send({ success: true, message: 'Product Deleted' });
+    } else {
+      res.status(404).send({ success: false, message: 'Product Not Found' });
+    }
+  })
+);
+
 productRouter.post(
   '/',
   isAuth,
