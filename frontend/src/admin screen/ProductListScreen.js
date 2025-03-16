@@ -48,11 +48,20 @@ const reducer = (state, action) => {
 
 export default function ProductListScreen() {
   const [
-    { loading, error, products, pages, loadingDelete, successDelete },
+    {
+      loading,
+      error,
+      products,
+      pages,
+      loadingDelete,
+      successDelete,
+      loadingCreate,
+    },
     dispatch,
   ] = useReducer(reducer, {
     loading: true,
     error: '',
+    loadingCreate: false, // Add this
   });
 
   const navigate = useNavigate();
@@ -156,9 +165,16 @@ export default function ProductListScreen() {
               variant="primary"
               onClick={createHandler}
               className="rounded-pill px-4"
+              disabled={loadingCreate}
             >
-              <i className="bi bi-plus-lg me-2"></i>
-              Create Product
+              {loadingCreate ? (
+                <LoadingBox />
+              ) : (
+                <>
+                  <i className="bi bi-plus-lg me-2"></i>
+                  Create Product
+                </>
+              )}
             </Button>
           </Col>
         </Row>

@@ -189,6 +189,34 @@ productRouter.get(
   })
 );
 
+productRouter.post(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const product = new Product({
+      name: 'New Product',
+      code: `CODE-${Date.now()}`,
+      slug: `new-product-${Date.now()}`,
+      image: '/images/placeholder.jpg',
+      price: 0,
+      category: 'Sample Category',
+      brand: 'Sample Brand',
+      countInStock: 0,
+      rating: 0,
+      numReviews: 0,
+      description: 'Sample Description',
+      fabric: 'Sample Fabric',
+      sizes: [],
+    });
+
+    const createdProduct = await product.save();
+    res
+      .status(201)
+      .send({ message: 'Product Created', product: createdProduct });
+  })
+);
+
 productRouter.get('/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
