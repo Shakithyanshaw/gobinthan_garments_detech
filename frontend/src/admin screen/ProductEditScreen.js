@@ -181,17 +181,47 @@ export default function ProductEditScreen() {
   };
 
   const uploadFileHandler = async (e, forImages) => {
-    // Keep existing uploadFileHandler implementation
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      dispatch({ type: 'UPLOAD_REQUEST' });
+      const { data } = await axios.post('/api/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOAD_SUCCESS' });
+
+      if (forImages) {
+        setImages([...images, data.secure_url]);
+      } else {
+        setImage(data.secure_url);
+      }
+      toast.success('Image uploaded successfully. Click Update to apply it!');
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+    }
   };
 
-  const deleteFileHandler = async (fileName) => {
-    // Keep existing deleteFileHandler implementation
+  const deleteFileHandler = async (fileName, f) => {
+    console.log(fileName, f);
+    console.log(images);
+    console.log(images.filter((x) => x !== fileName));
+    setImages(images.filter((x) => x !== fileName));
+    toast.success('Image removed successfully. click Update to apply it');
+  };
+
+  const smallContainerStyle = {
+    maxWidth: '900px',
   };
 
   return (
     <div>
       <CardHeader />
-      <Container className="small-container">
+      <Container style={smallContainerStyle}>
         <Helmet>
           <title>Edit Product {productId}</title>
         </Helmet>
@@ -327,15 +357,28 @@ export default function ProductEditScreen() {
                 </Form.Group>
               </Col>
             </Row>
-
-            <Form.Group className="mb-3" controlId="fabric">
-              <Form.Label>Fabric</Form.Label>
-              <Form.Control
-                value={fabric}
-                onChange={(e) => setFabric(e.target.value)}
-                required
-              />
-            </Form.Group>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="fabric">
+                  <Form.Label>Fabric</Form.Label>
+                  <Form.Control
+                    value={fabric}
+                    onChange={(e) => setFabric(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="countInStock">
+                  <Form.Label>Count In Stock</Form.Label>
+                  <Form.Control
+                    value={countInStock}
+                    onChange={(e) => setCountInStock(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
             <Form.Group className="mb-3" controlId="sizes">
               <Form.Label>Sizes & Colors</Form.Label>

@@ -81,6 +81,30 @@ export default function ProductListScreen() {
     }
   }, [page, userInfo, successDelete]);
 
+  const createHandler = async () => {
+    if (window.confirm('Are you sure to create a Product?')) {
+      try {
+        dispatch({ type: 'CREATE_REQUEST' });
+        const { data } = await axios.post(
+          '/api/products',
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        toast.success('Product created successfully');
+        dispatch({ type: 'CREATE_SUCCESS' });
+        navigate(`/admin/product/${data.product._id}`);
+      } catch (err) {
+        toast.error(getError(err));
+        dispatch({
+          type: 'CREATE_FAIL',
+          payload: getError(err),
+        });
+      }
+    }
+  };
+
   const deleteHandler = async (product) => {
     if (window.confirm('Are you sure to delete?')) {
       try {
@@ -130,7 +154,7 @@ export default function ProductListScreen() {
           <Col className="text-end">
             <Button
               variant="primary"
-              onClick={() => navigate('/admin/product/new')}
+              onClick={createHandler}
               className="rounded-pill px-4"
             >
               <i className="bi bi-plus-lg me-2"></i>
