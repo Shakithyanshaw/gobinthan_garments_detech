@@ -154,9 +154,8 @@ export default function ProductListScreen() {
                     <th className="px-4">Product Name</th>
                     <th>Product Code</th>
                     <th>Category</th>
-                    <th>Rating</th>
                     <th>Fabric</th>
-
+                    <th>Colors</th>
                     <th>Sizes</th>
                     <th>Actions</th>
                   </tr>

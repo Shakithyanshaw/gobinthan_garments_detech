@@ -1,6 +1,7 @@
 import express from 'express';
 import Product from '../models/productModel.js';
 import expressAsyncHandler from 'express-async-handler';
+import { isAuth, isAdmin } from '../utils.js';
 
 const productRouter = express.Router();
 const PAGE_SIZE = 10;
@@ -9,30 +10,6 @@ productRouter.get(`/`, async (req, res) => {
   const products = await Product.find();
   res.send(products);
 });
-
-// Admin Product List Route
-productRouter.get(
-  '/admin',
-  expressAsyncHandler(async (req, res) => {
-    const { page = 1 } = req.query;
-
-    const products = await Product.find({})
-      .select('name code category fabric sizes createdAt updatedAt')
-
-      .skip(PAGE_SIZE * (page - 1))
-      .limit(PAGE_SIZE)
-      .sort({ createdAt: -1 });
-
-    const countProducts = await Product.countDocuments({});
-
-    res.send({
-      products,
-      countProducts,
-      page: Number(page),
-      pages: Math.ceil(countProducts / PAGE_SIZE),
-    });
-  })
-);
 
 productRouter.get(
   '/search',
@@ -185,6 +162,71 @@ productRouter.get(`/slug/:slug`, async (req, res) => {
     res.send(product);
   } else {
     res.status(404).send({ message: 'Product not found' });
+  }
+});
+
+// Admin Product List Route
+productRouter.get(
+  '/admin',
+  expressAsyncHandler(async (req, res) => {
+    const { page = 1 } = req.query;
+
+    const products = await Product.find({})
+      .select('name code category fabric sizes createdAt updatedAt')
+
+      .skip(PAGE_SIZE * (page - 1))
+      .limit(PAGE_SIZE)
+      .sort({ createdAt: -1 });
+
+    const countProducts = await Product.countDocuments({});
+
+    res.send({
+      products,
+      countProducts,
+      page: Number(page),
+      pages: Math.ceil(countProducts / PAGE_SIZE),
+    });
+  })
+);
+
+productRouter.get('/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      res.json(product);
+    } else {
+      res.status(404).json({ message: 'Product Not Found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving product' });
+  }
+});
+
+productRouter.put('/:id', isAuth, isAdmin, async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      product.name = req.body.name || product.name;
+      product.code = req.body.code || product.code;
+      product.slug = req.body.slug || product.slug;
+      product.category = req.body.category || product.category;
+      product.image = req.body.image || product.image;
+      product.price = req.body.price || product.price;
+      product.countInStock = req.body.countInStock || product.countInStock;
+      product.brand = req.body.brand || product.brand;
+      product.rating = req.body.rating || product.rating;
+      product.numReviews = req.body.numReviews || product.numReviews;
+      product.description = req.body.description || product.description;
+      product.fabric = req.body.fabric || product.fabric;
+      product.sizes = req.body.sizes || product.sizes; // Array of sizes with colors and quantity
+
+      const updatedProduct = await product.save();
+      res.json({ message: 'Product Updated', product: updatedProduct });
+    } else {
+      res.status(404).json({ message: 'Product Not Found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating product' });
   }
 });
 
