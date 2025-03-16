@@ -17,9 +17,8 @@ productRouter.get(
     const { page = 1 } = req.query;
 
     const products = await Product.find({})
-      .select(
-        'name code category rating countInStock sizes createdAt updatedAt'
-      )
+      .select('name code category fabric sizes createdAt updatedAt')
+
       .skip(PAGE_SIZE * (page - 1))
       .limit(PAGE_SIZE)
       .sort({ createdAt: -1 });

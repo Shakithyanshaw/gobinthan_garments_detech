@@ -152,11 +152,11 @@ export default function ProductListScreen() {
                 <thead className="table-dark">
                   <tr>
                     <th className="px-4">Product Name</th>
-                    <th>SKU</th>
+                    <th>Product Code</th>
                     <th>Category</th>
                     <th>Rating</th>
-                    <th>Stock</th>
-                    <th>Colors</th>
+                    <th>Fabric</th>
+
                     <th>Sizes</th>
                     <th>Actions</th>
                   </tr>
@@ -172,17 +172,15 @@ export default function ProductListScreen() {
                         </Badge>
                       </td>
                       <td>
-                        <Badge bg="warning" pill className="px-2">
-                          {product.rating} ★
-                        </Badge>
-                      </td>
-                      <td>
                         <Badge
-                          bg={product.countInStock > 0 ? 'success' : 'danger'}
+                          bg="secondary"
+                          pill
+                          className="px-3 py-2 text-uppercase shadow-sm"
                         >
-                          {product.countInStock}
+                          {product.fabric || 'N/A'}
                         </Badge>
                       </td>
+
                       <td className="text-nowrap">
                         <small>{getAvailableColors(product)}</small>
                       </td>
