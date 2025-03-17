@@ -33,7 +33,7 @@ function ProductScreen() {
   const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
-
+  const [selectedImage, setSelectedImage] = useState('');
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
     loading: true,
@@ -85,9 +85,27 @@ function ProductScreen() {
             <Col md={6}>
               <img
                 className="img-large"
-                src={product.image}
+                src={selectedImage || product.image}
                 alt={product.name}
               ></img>
+              <ListGroup.Item>
+                <Row xs={1} md={2} className="g-2">
+                  {[product.image, ...(product.images || [])].map((x) => (
+                    <Col key={x}>
+                      <Card>
+                        <Button
+                          className="thumbnail"
+                          type="button"
+                          variant="light"
+                          onClick={() => setSelectedImage(x)}
+                        >
+                          <Card.Img variant="top" src={x} alt="product" />
+                        </Button>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </ListGroup.Item>
             </Col>
             <Col md={5}>
               <ListGroup>
