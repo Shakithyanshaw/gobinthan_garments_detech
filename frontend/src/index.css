@@ -141,3 +141,22 @@ h4 {
   border-radius: 0.5rem;
   overflow: hidden;
 }
+
+@media (max-width: 768px) {
+  .table-responsive {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    font-size: 14px; /* Reduce font size for better visibility */
+  }
+
+  .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}

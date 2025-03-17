@@ -192,24 +192,24 @@ export default function ProductListScreen() {
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <>
-            <div className="table-responsive">
+            <div className="table-responsive overflow-auto">
               <Table striped bordered hover className="align-middle shadow-sm">
                 <thead className="table-dark">
                   <tr>
-                    <th className="px-4">Product Name</th>
-                    <th>Product Code</th>
-                    <th>Category</th>
-                    <th>Fabric</th>
-                    <th>Colors</th>
-                    <th>Sizes</th>
-                    <th>Actions</th>
+                    <th className="px-3">Product Name</th>
+                    <th className="px-3">Product Code</th>
+                    <th className="px-3">Category</th>
+                    <th className="px-3">Fabric</th>
+                    <th className="px-3">Colors</th>
+                    <th className="px-3">Sizes</th>
+                    <th className="px-3">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
                     <tr key={product._id} className="hover-highlight">
-                      <td className="fw-semibold">{product.name}</td>
-                      <td className="text-muted">{product.code}</td>
+                      <td className="fw-semibold text-wrap">{product.name}</td>
+                      <td className="text-muted text-wrap">{product.code}</td>
                       <td>
                         <Badge bg="info" className="text-uppercase">
                           {product.category}
@@ -224,34 +224,33 @@ export default function ProductListScreen() {
                           {product.fabric || 'N/A'}
                         </Badge>
                       </td>
-
                       <td className="text-nowrap">
                         <small>{getAvailableColors(product)}</small>
                       </td>
                       <td className="text-nowrap">
                         <small>{getAvailableSizes(product)}</small>
                       </td>
-                      <td>
-                        <Button
-                          variant="outline-primary"
-                          size="sm"
-                          className="me-2 rounded-pill px-3"
-                          onClick={() =>
-                            navigate(`/admin/product/${product._id}`)
-                          }
-                        >
-                          <i className="bi bi-pencil-square me-1"></i>
-                          Edit
-                        </Button>
-                        <Button
-                          variant="outline-danger"
-                          size="sm"
-                          className="rounded-pill px-3"
-                          onClick={() => deleteHandler(product)}
-                        >
-                          <i className="bi bi-trash me-1"></i>
-                          Delete
-                        </Button>
+                      <td className="text-nowrap">
+                        <div className="d-flex gap-2">
+                          <Button
+                            variant="outline-primary"
+                            size="sm"
+                            className="rounded-pill px-3"
+                            onClick={() =>
+                              navigate(`/admin/product/${product._id}`)
+                            }
+                          >
+                            <i className="bi bi-pencil-square me-1"></i> Edit
+                          </Button>
+                          <Button
+                            variant="outline-danger"
+                            size="sm"
+                            className="rounded-pill px-3"
+                            onClick={() => deleteHandler(product)}
+                          >
+                            <i className="bi bi-trash me-1"></i> Delete
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   ))}
