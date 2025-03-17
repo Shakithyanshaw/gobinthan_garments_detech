@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema(
     code: { type: String, required: true, unique: true }, // Added code field
     slug: { type: String, required: true, unique: true },
     category: { type: String, required: true },
-    image: { type: String, required: true },
+    images: [String],
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
     brand: { type: String, required: true },
