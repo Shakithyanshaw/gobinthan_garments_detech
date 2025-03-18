@@ -26,7 +26,7 @@ const Header = () => {
 
       {/* Main content container */}
       <div className="relative z-0 container text-center mx-auto mt-20 md:px-20 lg:px-32 text-white">
-        <h2 className=" text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[82px] whitespace-nowrap font-semibold pt-0">
+        <h2 className=" text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[62px] whitespace-nowrap font-semibold pt-0">
           Welcome to <br /> Kobinthan Garments
         </h2>
         <p className="text-sm sm:text-base md:text-lg lg:text-xl mt-4">
@@ -39,10 +39,10 @@ const Header = () => {
         <div className="flex justify-center mt-3">
           <a
             href="/about"
-            className="bg-white text-customRed px-6 py-2 rounded-full border-none hover:bg-customRed hover:text-white transition-all duration-300 flex items-center space-x-2"
+            className="bg-gray-50 text-customRed px-6 py-2 rounded-full border-none hover:bg-customRed hover:text-gray-50 transition-all duration-300 flex items-center space-x-2"
           >
             <span>New Collection</span>
-            <span className="bg-customRed text-white p-2 rounded-full">
+            <span className="bg-customRed text-gray-50 hover:bg-gray-50 hover:text-customRed p-2 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"

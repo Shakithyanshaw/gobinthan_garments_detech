@@ -84,14 +84,13 @@ const CartNavbar = () => {
               </Badge>
             )}
           </Link>
+          <img
+            onClick={() => setShowMobileMenu(true)}
+            src={assets.menu}
+            className="md:hidden w-6 cursor-pointer"
+            alt="Menu"
+          />
         </div>
-
-        <img
-          onClick={() => setShowMobileMenu(true)}
-          src={assets.menu}
-          className="md:hidden w-6 cursor-pointer"
-          alt="Menu"
-        />
       </div>
 
       {showMobileMenu && (
@@ -120,33 +119,6 @@ const CartNavbar = () => {
               )
             )}
           </ul>
-
-          <div className="flex flex-col items-center mt-12 gap-4">
-            <Link to="/cart" className="nav-link">
-              Cart
-            </Link>
-            {userInfo ? (
-              <>
-                <Link to="/profile" className="nav-link">
-                  Profile
-                </Link>
-                <Link to="/orderhistory" className="nav-link">
-                  Order History
-                </Link>
-                <Link
-                  to="#signout"
-                  className="nav-link"
-                  onClick={signoutHandler}
-                >
-                  Sign Out
-                </Link>
-              </>
-            ) : (
-              <Link to="/signin" className="nav-link">
-                Sign In
-              </Link>
-            )}
-          </div>
 
           <div className="absolute bottom-6 flex justify-center w-full">
             <p className="text-sm text-gray-500">

@@ -4,7 +4,7 @@ import fabricImage from '../assets/FABRIC.png';
 const CardHeader = () => {
   return (
     <div
-      className="min-h-[25vh] sm:min-h-[30vh] lg:min-h-[30vh] ipad:min-h-[30vh] mb-4 bg-customRed bg-cover bg-center flex flex-col items-center w-full overflow-hidden relative"
+      className="min-h-[23vh] sm:min-h-[30vh] lg:min-h-[30vh] ipad:min-h-[20vh] mb-4 bg-customRed bg-cover bg-center flex flex-col items-center w-full overflow-hidden relative"
       style={{
         backgroundImage: `url(${fabricImage})`,
         backgroundSize: 'cover',
