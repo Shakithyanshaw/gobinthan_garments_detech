@@ -89,7 +89,7 @@ function ProductScreen() {
                 alt={product.name}
               ></img>
               <ListGroup.Item>
-                <Row xs={1} md={2} className="g-2">
+                <Row xs="auto" className="g-2 d-flex flex-nowrap">
                   {[product.image, ...(product.images || [])].map((x) => (
                     <Col key={x}>
                       <Card>
@@ -99,7 +99,12 @@ function ProductScreen() {
                           variant="light"
                           onClick={() => setSelectedImage(x)}
                         >
-                          <Card.Img variant="top" src={x} alt="product" />
+                          <Card.Img
+                            className="thumbnail-img"
+                            variant="top"
+                            src={x}
+                            alt="product"
+                          />
                         </Button>
                       </Card>
                     </Col>

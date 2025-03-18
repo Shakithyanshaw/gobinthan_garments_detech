@@ -83,8 +83,18 @@ h4 {
   max-width: 80%;
 }
 
-.img-thumbnail {
+.thumbnail-img {
   height: 100px;
+  width: auto;
+}
+
+.g-2 {
+  gap: 5px !important; /* Adjust spacing */
+}
+
+.d-flex.flex-nowrap {
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  white-space: nowrap;
 }
 
 .small-container {
