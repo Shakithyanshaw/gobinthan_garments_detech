@@ -142,7 +142,11 @@ const Navbar = () => {
             padding: '24px',
           }}
         >
-          <img src={assets.top_logo} alt="Logo" style={{ width: '96px' }} />
+          <img
+            src={assets.top_logo}
+            alt="Logo"
+            style={{ width: '96px', top: -25, position: 'relative' }}
+          />
           <img
             onClick={() => setShowMobileMenu(false)}
             src={assets.cross}

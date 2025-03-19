@@ -65,7 +65,7 @@ const CartNavbar = () => {
           )}
         </ul>
 
-        <div className="flex items-center gap-3 mt-3">
+        <div className="flex items-center gap-4 mt-3">
           <SearchBox />
           <Link
             to="/cart"
