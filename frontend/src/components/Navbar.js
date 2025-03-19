@@ -4,9 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
   const location = useLocation();
 
-  // Helper function to capitalize the first letter of each word
   const capitalize = (str) => {
     return str
       .split('-')
@@ -14,89 +14,173 @@ const Navbar = () => {
       .join(' ');
   };
 
+  // Update the screen size detection on window resize
   useEffect(() => {
-    if (showMobileMenu) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 1024); // Adjust 1024px breakpoint as needed
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup on unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = showMobileMenu ? 'hidden' : 'auto';
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, [showMobileMenu]);
 
   return (
-    <div className="absolute top-0 left-0 w-full z-10">
-      <div className="gap-2 container mx-auto flex justify-between items-center py-0 px-6 md:px-35 lg:px-40 bg-transparent">
-        {/* Logo */}
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        zIndex: 10,
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '0 24px',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          backgroundColor: 'transparent',
+        }}
+      >
         <Link to="/">
           <img
             src={assets.top_logo}
             alt="Logo"
-            className="w-24 md:w-24"
-            style={{ cursor: 'pointer' }} // Optional: Change cursor to pointer for better UX
+            style={{ width: '96px', cursor: 'pointer' }}
           />
         </Link>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-7 text-customRed bg-white px-6 py-2 rounded-full shadow-md">
-          {['/', '/about', '/contact', '/products', '/fabrics'].map(
-            (path, index) => (
-              <Link
-                key={index}
-                to={path}
-                className={`cursor-pointer px-3 py-2 ${
-                  location.pathname === path
-                    ? 'bg-customRed text-white rounded-full'
-                    : ''
-                }`}
-              >
-                {path === '/' ? 'Home' : capitalize(path.slice(1))}
-              </Link>
-            )
-          )}
-        </ul>
+        {/* Only show this on desktop screens */}
+        {isDesktop && (
+          <ul
+            style={{
+              display: 'flex',
+              gap: '28px',
+              backgroundColor: 'white',
+              padding: '8px 24px',
+              borderRadius: '999px',
+              boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+            }}
+          >
+            {['/', '/about', '/contact', '/products', '/fabrics'].map(
+              (path, index) => (
+                <Link
+                  key={index}
+                  to={path}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '999px',
+                    color: location.pathname === path ? 'white' : '#801001',
+                    backgroundColor:
+                      location.pathname === path ? '#801001' : 'transparent',
+                    textDecoration: 'none',
+                  }}
+                >
+                  {path === '/' ? 'Home' : capitalize(path.slice(1))}
+                </Link>
+              )
+            )}
+          </ul>
+        )}
 
-        {/* Careers Button */}
-        <button className="hidden md:block bg-white px-8 py-2 rounded-full">
-          Careers
-        </button>
+        {/* Only show this on desktop screens */}
+        {isDesktop && (
+          <button
+            style={{
+              backgroundColor: 'white',
+              padding: '8px 32px',
+              borderRadius: '999px',
+            }}
+          >
+            Careers
+          </button>
+        )}
 
-        {/* Mobile Menu Icon */}
-        <img
-          onClick={() => setShowMobileMenu(true)}
-          src={assets.menu}
-          className="md:hidden w-6 cursor-pointer"
-          alt="Menu"
-        />
+        {/* Menu Icon for Mobile View */}
+        {!isDesktop && (
+          <img
+            onClick={() => setShowMobileMenu(true)}
+            src={assets.menu}
+            style={{ width: '24px', cursor: 'pointer' }}
+            alt="Menu"
+          />
+        )}
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-0 right-0 w-full h-full bg-gradient-to-b from-customRed to-white text-customRed transition-transform duration-500 ${
-          showMobileMenu ? 'translate-x-0 z-50' : 'translate-x-full z-[-1]'
-        }`}
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          width: '100%',
+          height: '100%',
+          background: 'linear-gradient(to bottom, #801001, white)',
+          color: '#801001',
+          transform: showMobileMenu ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 0.5s ease-in-out',
+          zIndex: showMobileMenu ? 50 : -1,
+        }}
       >
-        <div className="flex justify-between items-center p-6 py-0">
-          <img src={assets.top_logo} alt="Logo" className="w-24" />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '24px',
+          }}
+        >
+          <img src={assets.top_logo} alt="Logo" style={{ width: '96px' }} />
           <img
             onClick={() => setShowMobileMenu(false)}
             src={assets.cross}
-            className="w-8 cursor-pointer hover:scale-110 transition-transform"
+            style={{
+              width: '32px',
+              cursor: 'pointer',
+              transform: 'scale(1.1)',
+            }}
             alt="Close"
           />
         </div>
 
-        <ul className="flex flex-col items-center gap-6 mt-12 text-lg font-semibold">
+        <ul
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '24px',
+            marginTop: '48px',
+            fontSize: '18px',
+            fontWeight: '600',
+          }}
+        >
           {['/', '/about', '/contact', '/products', '/fabrics'].map(
             (path, index) => (
               <Link
                 key={index}
                 to={path}
                 onClick={() => setShowMobileMenu(false)}
-                className={`px-6 py-3 rounded-full text-white bg-customRed shadow-lg hover:bg-red-500 hover:shadow-xl transition-all ${
-                  location.pathname === path ? 'bg-red-600' : ''
-                }`}
+                style={{
+                  padding: '12px 24px',
+                  borderRadius: '999px',
+                  color: 'white',
+                  backgroundColor:
+                    location.pathname === path ? '#b22222' : '#801001',
+                  textDecoration: 'none',
+                  boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+                }}
               >
                 {path === '/' ? 'Home' : capitalize(path.slice(1))}
               </Link>
@@ -105,14 +189,28 @@ const Navbar = () => {
           <a
             href="/career"
             onClick={() => setShowMobileMenu(false)}
-            className="px-6 py-3 rounded-full text-white bg-customRed shadow-lg hover:bg-red-500 hover:shadow-xl transition-all"
+            style={{
+              padding: '12px 24px',
+              borderRadius: '999px',
+              color: 'white',
+              backgroundColor: '#801001',
+              textDecoration: 'none',
+              boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+            }}
           >
             Careers
           </a>
         </ul>
 
-        <div className="absolute bottom-6 flex justify-center w-full">
-          <p className="text-sm text-gray-500">
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '24px',
+            width: '100%',
+            textAlign: 'center',
+          }}
+        >
+          <p style={{ fontSize: '14px', color: 'gray' }}>
             © 2024 Kobinthan Garments (Pvt) Ltd. All rights reserved.
           </p>
         </div>
