@@ -139,7 +139,7 @@ function ProductScreen() {
                   ></Rating>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <strong> Fabric Detail :-</strong>
+                  <strong> Fabric Name :-</strong>
                   <p>{product.fabric}</p>
                 </ListGroup.Item>
                 <ListGroup.Item>
