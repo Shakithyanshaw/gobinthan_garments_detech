@@ -9,6 +9,7 @@ const orderSchema = new mongoose.Schema(
         quantity: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
+        code: { type: String, required: true, unique: true },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Product',
@@ -22,6 +23,8 @@ const orderSchema = new mongoose.Schema(
       city: { type: String, required: true },
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
+      email: { type: String, required: true }, // Added email field
+      whatsapp: { type: String, required: true }, // Added whatsapp field
     },
 
     itemsPrice: { type: Number, required: true },

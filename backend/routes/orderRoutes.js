@@ -13,6 +13,9 @@ orderRouter.post(
       shippingAddress: req.body.shippingAddress,
       itemsPrice: req.body.itemsPrice,
       shippingPrice: req.body.shippingPrice,
+      email: req.body.email, // Include email
+      whatsapp: req.body.whatsapp, // Include whatsapp
+      code: req.body.code,
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
       user: req.user._id,
