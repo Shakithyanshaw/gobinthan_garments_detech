@@ -35,6 +35,11 @@ function Product(props) {
           src={product.image}
           className="card-img-top rounded-t-lg transition-transform duration-300 ease-in-out hover:scale-105"
           alt={product.name}
+          style={{
+            width: '100%', // Set the width to 100% of the parent container (or use a fixed value like '200px')
+            height: '400px', // Set a fixed height for the image
+            objectFit: 'cover', // Ensure the image covers the area without distortion
+          }}
         />
       </Link>
 
@@ -49,9 +54,9 @@ function Product(props) {
             variant="light"
             disabled
             style={{
-              backgroundColor: '#ff4d4d', // Change this to your preferred color
+              backgroundColor: '#ff4d4d',
               color: 'white',
-              opacity: 1, // Override Bootstrap's default opacity
+              opacity: 1,
               border: 'none',
             }}
           >
