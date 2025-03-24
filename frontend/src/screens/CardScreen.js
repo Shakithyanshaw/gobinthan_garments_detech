@@ -100,19 +100,39 @@ export default function CartScreen() {
                             <Button
                               style={{ color: '#801001' }}
                               onClick={() =>
-                                updateCartHandler(item, item.quantity - 10)
+                                updateCartHandler(item, item.quantity - 5)
+                              }
+                              variant="light"
+                              disabled={item.quantity <= 5} // Disable if quantity is 5 or less
+                            >
+                              <i className="fas fa-minus-circle"></i>
+                            </Button>
+                            <Button
+                              style={{ color: '#801001' }}
+                              onClick={() =>
+                                updateCartHandler(item, item.quantity - 1)
                               }
                               variant="light"
                               disabled={item.quantity === 1}
                             >
-                              <i className="fas fa-minus-circle"></i>
+                              <i className="fas fa-minus"></i>
                             </Button>
                             <span>{item.quantity}</span>
                             <Button
                               style={{ color: '#801001' }}
                               variant="light"
                               onClick={() =>
-                                updateCartHandler(item, item.quantity + 10)
+                                updateCartHandler(item, item.quantity + 1)
+                              }
+                              disabled={item.quantity === item.countInStock}
+                            >
+                              <i className="fas fa-plus"></i>
+                            </Button>
+                            <Button
+                              style={{ color: '#801001' }}
+                              variant="light"
+                              onClick={() =>
+                                updateCartHandler(item, item.quantity + 5)
                               }
                               disabled={item.quantity === item.countInStock}
                             >
