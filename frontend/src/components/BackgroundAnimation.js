@@ -19,55 +19,43 @@ const BackgroundAnimation = () => {
   }, []);
 
   useEffect(() => {
-    const shapeContainer = document.querySelector('.animated-shapes');
+    const lineContainer = document.querySelector('.running-lines');
 
-    // Create floating shapes with more colors
-    const createShape = () => {
-      const shape = document.createElement('div');
-      shape.classList.add('shape');
+    // Create running lines (box shapes with animation)
+    const createLine = () => {
+      const line = document.createElement('div');
+      line.classList.add('line');
 
-      // Random size
-      const size = Math.random() * 100 + 30;
-      shape.style.width = `${size}px`;
-      shape.style.height = `${size}px`;
+      // Random position and speed for the running line
+      const size = Math.random() * 100 + 50; // Random width for the box
+      line.style.width = `${size}px`;
 
-      // Random position
-      shape.style.left = `${Math.random() * 100}vw`;
-      shape.style.top = `${Math.random() * 100}vh`;
+      // Position from top to create dynamic movement
+      line.style.top = `${Math.random() * 100}vh`;
 
-      // Random animation duration
-      shape.style.animationDuration = `${Math.random() * 7 + 3}s`;
+      // Random animation duration (speed)
+      const animationDuration = Math.random() * 5 + 5; // between 5s and 10s
+      line.style.animationDuration = `${animationDuration}s`;
 
-      // Random colors for variety
-      const colors = [
-        'rgba(255, 0, 0, 0.2)',
-        'rgba(0, 255, 0, 0.2)',
-        'rgba(0, 0, 255, 0.2)',
-        'rgba(255, 165, 0, 0.2)',
-        'rgba(128, 0, 128, 0.2)',
-      ];
-      shape.style.background =
-        colors[Math.floor(Math.random() * colors.length)];
+      lineContainer.appendChild(line);
 
-      shapeContainer.appendChild(shape);
-
-      // Remove shape after animation
+      // Remove line after animation
       setTimeout(() => {
-        shape.remove();
-      }, 12000);
+        line.remove();
+      }, animationDuration * 1000);
     };
 
-    // Adjust the frequency of shape creation for small screens
-    const intervalShapes = setInterval(createShape, isSmallScreen ? 1200 : 700); // Longer interval for small screens
+    // Adjust frequency of line creation for small screens
+    const intervalLines = setInterval(createLine, isSmallScreen ? 1500 : 800); // Longer interval for small screens
 
     return () => {
-      clearInterval(intervalShapes);
+      clearInterval(intervalLines);
     };
-  }, [isSmallScreen]); // Rerun effect if screen size changes
+  }, [isSmallScreen]);
 
   return (
     <div className="background">
-      <div className="animated-shapes"></div>
+      <div className="running-lines"></div>
       <div className="letters">KG</div>
     </div>
   );

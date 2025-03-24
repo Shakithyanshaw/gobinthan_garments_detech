@@ -23,19 +23,29 @@
   }
 }
 
-/* Floating animated shapes */
-.animated-shapes {
+/* Running lines container */
+.running-lines {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-/* Animated Circles */
-.shape {
+/* Running Line (box) animation */
+.line {
   position: absolute;
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: floatAnimation 12s infinite alternate ease-in-out;
+  height: 2px; /* Thin line for running effect */
+  background-color: rgba(156, 156, 156, 0.2);
+  animation: runLine 10s infinite linear;
+}
+
+/* Running line movement animation */
+@keyframes runLine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 /* "KG" Text - Centered and Zoom-in Animation */
@@ -51,19 +61,6 @@
   user-select: none;
   text-shadow: 5px 5px 15px rgba(156, 156, 156, 0.2);
   animation: zoomIn 3s infinite alternate ease-in-out;
-}
-
-/* Floating Effect */
-@keyframes floatAnimation {
-  0% {
-    transform: translateY(0px) translateX(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-40px) translateX(30px) rotate(180deg);
-  }
-  100% {
-    transform: translateY(0px) translateX(-30px) rotate(360deg);
-  }
 }
 
 /* Zoom-in Animation for KG */
@@ -84,9 +81,10 @@
     font-size: 15rem; /* Smaller size for tablets */
   }
 
-  .shape {
-    opacity: 0.5; /* Slightly more visible shapes on smaller screens */
-    animation-duration: 10s; /* Adjust animation speed */
+  .line {
+    height: 2px; /* Keep the line thin */
+    opacity: 0.5; /* Slightly more visible lines on smaller screens */
+    animation-duration: 8s; /* Adjust animation speed */
   }
 }
 
@@ -96,8 +94,9 @@
     font-size: 8rem; /* Even smaller size for mobile */
   }
 
-  .shape {
-    opacity: 0.7; /* More visible shapes on mobile */
-    animation-duration: 8s; /* Adjust animation speed */
+  .line {
+    height: 2px; /* Keep the line thin */
+    opacity: 0.7; /* More visible lines on mobile */
+    animation-duration: 6s; /* Adjust animation speed */
   }
 }
