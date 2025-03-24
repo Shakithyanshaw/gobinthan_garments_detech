@@ -1,122 +1,170 @@
-import React, { useState, useEffect } from 'react';
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Marker,
-  ZoomableGroup,
-} from 'react-simple-maps';
-import { geoCentroid } from 'd3-geo';
+import React, { useEffect, useRef, useState } from 'react';
+import Globe from 'react-globe.gl';
+import { Col, Row } from 'react-bootstrap';
+import { FiHome, FiUser } from 'react-icons/fi';
 
-const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
-
-const locations = {
-  'New York': { coordinates: [-74.006, 40.7128] },
-  London: { coordinates: [-0.1278, 51.5074] },
-  Tokyo: { coordinates: [139.6917, 35.6895] },
-  India: { coordinates: [78.9629, 20.5937] },
-  China: { coordinates: [104.1954, 35.8617] },
-  Germany: { coordinates: [10.4515, 51.1657] },
+const countryFlags = {
+  UK: 'https://flagcdn.com/w40/gb.png',
+  Switzerland: 'https://flagcdn.com/w40/ch.png',
+  Canada: 'https://flagcdn.com/w40/ca.png',
 };
 
-const MapChart = ({ selectedLocation }) => {
-  const [center, setCenter] = useState([0, 0]);
-  const [zoom, setZoom] = useState(1);
+const factoryLocations = [
+  { id: 1, name: 'Thonikkal, Vavuniya', lat: 8.7513, lng: 80.497 },
+  { id: 2, name: 'Nochchimottai, Vavuniya', lat: 8.7515, lng: 80.4975 },
+];
 
-  useEffect(() => {
-    if (selectedLocation && locations[selectedLocation]) {
-      const [x, y] = locations[selectedLocation].coordinates;
-      setCenter([x, y]);
-      setZoom(4);
-    }
-  }, [selectedLocation]);
+const customerLocations = [
+  { id: 3, name: 'London, UK', lat: 51.5074, lng: -0.1278, country: 'UK' },
+  {
+    id: 4,
+    name: 'Switzerland',
+    lat: 46.8182,
+    lng: 8.2275,
+    country: 'Switzerland',
+  },
+  {
+    id: 5,
+    name: 'Toronto, Canada',
+    lat: 43.7001,
+    lng: -79.4163,
+    country: 'Canada',
+  },
+];
 
-  return (
-    <ComposableMap projection="geoMercator">
-      <ZoomableGroup center={center} zoom={zoom}>
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill="#EAEAEC"
-                stroke="#D6D6DA"
-              />
-            ))
-          }
-        </Geographies>
-
-        {Object.entries(locations).map(([name, { coordinates }]) => (
-          <Marker key={name} coordinates={coordinates}>
-            <circle
-              r={6}
-              fill="#FF5533"
-              stroke="#FFF"
-              strokeWidth={2}
-              onClick={() => console.log('Clicked:', name)}
-            />
-            <text
-              textAnchor="middle"
-              y={-15}
-              style={{ fontFamily: 'system-ui', fill: '#5D5A6D' }}
-            >
-              {name}
-            </text>
-          </Marker>
-        ))}
-      </ZoomableGroup>
-    </ComposableMap>
-  );
-};
-
-export default function Location() {
+const Location = () => {
+  const globeRef = useRef();
   const [selectedLocation, setSelectedLocation] = useState(null);
 
+  const handleLocationClick = (location) => {
+    setSelectedLocation(location);
+    if (globeRef.current) {
+      globeRef.current.pointOfView(
+        { lat: location.lat, lng: location.lng, altitude: 0.4 },
+        1500
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (globeRef.current) {
+      globeRef.current.controls().enableZoom = true;
+    }
+  }, []);
+
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Keep your existing sidebar structure */}
-      <div
-        style={{ width: '250px', padding: '20px', backgroundColor: '#f8f8f8' }}
-      >
-        <h3>Customer Locations</h3>
-        <ul>
-          {['New York', 'London', 'Tokyo'].map((location) => (
-            <li
-              key={location}
-              onClick={() => setSelectedLocation(location)}
-              style={{
-                cursor: 'pointer',
-                padding: '8px',
-                borderBottom: '1px solid #ddd',
-              }}
-            >
-              {location}
-            </li>
-          ))}
-        </ul>
+    <div className="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+          Global Presence
+        </h1>
 
-        <h3>Factory Locations</h3>
-        <ul>
-          {['India', 'China', 'Germany'].map((location) => (
-            <li
-              key={location}
-              onClick={() => setSelectedLocation(location)}
-              style={{
-                cursor: 'pointer',
-                padding: '8px',
-                borderBottom: '1px solid #ddd',
-              }}
-            >
-              {location}
-            </li>
-          ))}
-        </ul>
-      </div>
+        <Row className="h-[calc(100vh-160px)] rounded-2xl overflow-hidden shadow-xl">
+          {/* Left Panel - Locations List */}
+          <Col md={4} className="bg-white p-6 border-r border-gray-200">
+            <div className="mb-8">
+              <div className="flex items-center mb-4">
+                <FiHome className="text-blue-600 mr-2 text-xl" />
+                <h2 className="text-xl font-semibold text-gray-800">
+                  Our Factories
+                </h2>
+              </div>
+              <div className="space-y-2">
+                {factoryLocations.map((location) => (
+                  <button
+                    key={location.id}
+                    onClick={() => handleLocationClick(location)}
+                    className={`w-full flex items-center p-4 rounded-xl transition-all duration-300 ${
+                      selectedLocation?.id === location.id
+                        ? 'bg-blue-100 border-2 border-blue-500'
+                        : 'bg-gray-50 hover:bg-blue-50 border-2 border-transparent'
+                    }`}
+                  >
+                    <div
+                      className={`w-3 h-3 rounded-full mr-3 ${
+                        selectedLocation?.id === location.id
+                          ? 'bg-blue-600'
+                          : 'bg-gray-400'
+                      }`}
+                    />
+                    <span className="text-gray-700 font-medium">
+                      {location.name}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
-      <div style={{ flex: 1 }}>
-        <MapChart selectedLocation={selectedLocation} />
+            <div className="border-t border-gray-200 pt-8">
+              <div className="flex items-center mb-4">
+                <FiUser className="text-green-600 mr-2 text-xl" />
+                <h2 className="text-xl font-semibold text-gray-800">
+                  Customer Locations
+                </h2>
+              </div>
+              <div className="space-y-2">
+                {customerLocations.map((location) => (
+                  <button
+                    key={location.id}
+                    onClick={() => handleLocationClick(location)}
+                    className={`w-full flex items-center p-4 rounded-xl transition-all duration-300 ${
+                      selectedLocation?.id === location.id
+                        ? 'bg-green-100 border-2 border-green-500'
+                        : 'bg-gray-50 hover:bg-green-50 border-2 border-transparent'
+                    }`}
+                  >
+                    <img
+                      src={countryFlags[location.country]}
+                      alt={location.country}
+                      className="w-8 h-5 object-cover rounded-sm mr-3 shadow-sm"
+                    />
+                    <span className="text-gray-700 font-medium">
+                      {location.name}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </Col>
+
+          {/* Right Panel - Globe */}
+          <Col md={8} className="bg-gray-900 p-0 relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-gray-900/50" />
+            <div className="h-full w-full relative">
+              <Globe
+                ref={globeRef}
+                globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+                backgroundColor="rgba(0,0,0,0)"
+                pointLat="lat"
+                pointLng="lng"
+                pointColor={(d) =>
+                  selectedLocation?.id === d.id
+                    ? '#ff0000'
+                    : factoryLocations.some((f) => f.id === d.id)
+                    ? '#3b82f6'
+                    : '#10b981'
+                }
+                pointAltitude={(d) =>
+                  selectedLocation?.id === d.id ? 0.4 : 0.1
+                }
+                pointRadius={(d) => (selectedLocation?.id === d.id ? 1.5 : 0.8)}
+                labelsData={[...factoryLocations, ...customerLocations]}
+                labelLat="lat"
+                labelLng="lng"
+                labelText="name"
+                labelSize={1.2}
+                labelColor={() => 'rgba(255, 255, 255, 0.75)'}
+                labelResolution={2}
+                labelDotRadius={0.5}
+                labelDotOrientation={() => 'bottom'}
+                atmosphereColor="rgba(100, 150, 255, 0.4)"
+              />
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   );
-}
+};
+
+export default Location;
