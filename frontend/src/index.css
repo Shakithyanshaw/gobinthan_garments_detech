@@ -170,3 +170,12 @@ h4 {
     font-size: 12px;
   }
 }
+.rating-link {
+  font-size: 0.85rem; /* Default font size for small screens */
+}
+
+@media (min-width: 1200px) {
+  .rating-link {
+    font-size: 1rem; /* Smaller font size for extra large screens (xl) */
+  }
+}

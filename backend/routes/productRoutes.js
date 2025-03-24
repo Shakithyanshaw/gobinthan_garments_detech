@@ -4,7 +4,7 @@ import expressAsyncHandler from 'express-async-handler';
 import { isAuth, isAdmin } from '../utils.js';
 
 const productRouter = express.Router();
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 6;
 
 productRouter.get(`/`, async (req, res) => {
   const products = await Product.find();

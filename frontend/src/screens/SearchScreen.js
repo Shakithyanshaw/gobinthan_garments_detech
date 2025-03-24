@@ -172,7 +172,16 @@ export default function SearchScreen() {
           </Row>
 
           <Row>
-            <Col md={3}>
+            <Col
+              xs={3}
+              md={3}
+              className="pe-2"
+              style={{
+                maxHeight: '140vh',
+                overflowY: 'auto',
+                borderRight: '1px solid #ddd',
+              }}
+            >
               {/* Size Filter */}
               <div className="searchCard mb-4">
                 <h4 style={{ fontSize: '2rem' }}>Size</h4>
@@ -271,7 +280,7 @@ export default function SearchScreen() {
               </div>
 
               {/* Rating Filter */}
-              <div className="searchCard">
+              <div className="searchCard mb-4">
                 <h4 style={{ fontSize: '2rem' }}>Rating</h4>
                 <ul className="list-unstyled">
                   {ratings.map((r) => (
@@ -280,8 +289,8 @@ export default function SearchScreen() {
                         to={getFilterUrl({ rating: r.rating })}
                         className={
                           `${r.rating}` === `${rating}`
-                            ? 'text-bold'
-                            : 'searchCard'
+                            ? 'text-bold rating-link'
+                            : 'searchCard rating-link'
                         }
                       >
                         <Rating caption={' & up'} rating={r.rating}></Rating>
@@ -291,7 +300,11 @@ export default function SearchScreen() {
                   <li>
                     <Link
                       to={getFilterUrl({ rating: 'all' })}
-                      className={rating === 'all' ? 'text-bold' : 'searchCard'}
+                      className={
+                        rating === 'all'
+                          ? 'text-bold rating-link'
+                          : 'searchCard rating-link'
+                      }
                     >
                       <Rating caption={' & up'} rating={0}></Rating>
                     </Link>
@@ -300,7 +313,14 @@ export default function SearchScreen() {
               </div>
             </Col>
 
-            <Col md={9}>
+            <Col
+              xs={9}
+              md={9}
+              style={{
+                maxHeight: '140vh',
+                overflowY: 'auto',
+              }}
+            >
               {loading ? (
                 <LoadingBox />
               ) : error ? (
