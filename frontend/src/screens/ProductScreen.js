@@ -87,6 +87,11 @@ function ProductScreen() {
                 className="img-large"
                 src={selectedImage || product.image}
                 alt={product.name}
+                style={{
+                  width: '100%', // Set the width to 100% of the parent container (or use a fixed value like '200px')
+                  height: '600px', // Set a fixed height for the image
+                  objectFit: 'cover', // Ensure the image covers the area without distortion
+                }}
               ></img>
               <ListGroup.Item>
                 <Row xs="auto" className="g-2 d-flex flex-nowrap">
