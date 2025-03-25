@@ -40,7 +40,7 @@ const Location = () => {
     setSelectedLocation(location);
     if (globeRef.current) {
       globeRef.current.pointOfView(
-        { lat: location.lat, lng: location.lng, altitude: 0.4 },
+        { lat: location.lat, lng: location.lng, altitude: 2 },
         1500
       );
     }
@@ -128,9 +128,12 @@ const Location = () => {
           </Col>
 
           {/* Right Panel - Globe */}
-          <Col md={8} className="bg-gray-900 p-0 relative">
+          <Col
+            md={8}
+            className="bg-gray-900 p-0 relative flex justify-center items-center overflow-hidden"
+          >
             <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-gray-900/50" />
-            <div className="h-full w-full relative">
+            <div className="relative flex justify-center items-center h-full w-full">
               <Globe
                 ref={globeRef}
                 globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
